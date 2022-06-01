@@ -1,4 +1,9 @@
 {fetchNixpkgs, ...}: {
+  formatMarkdown = {
+    enable = true;
+    doctocArgs = ["--title" "# Contents"];
+    targets = ["/README.md"];
+  };
   formatNix = {
     enable = true;
     targets = ["/"];
@@ -24,6 +29,12 @@
   };
   lintGitMailMap = {
     enable = true;
+  };
+  lintMarkdown = {
+    readme = {
+      config = "/.lint-markdown/config.rb";
+      targets = ["/"];
+    };
   };
   lintNix = {
     enable = true;
