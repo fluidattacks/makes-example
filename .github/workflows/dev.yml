@@ -1,0 +1,112 @@
+permissions: read-all
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.actor }}
+jobs:
+  all:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+      - uses: docker://ghcr.io/fluidattacks/makes:22.06
+        name: __all__
+        with:
+          set-safe-directory: "/github/workspace"
+          args: m . __all__
+
+  formatMarkdown:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+      - uses: docker://ghcr.io/fluidattacks/makes:22.06
+        name: /formatMarkdown
+        with:
+          set-safe-directory: "/github/workspace"
+          args: m . /formatMarkdown
+
+  formatNix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+      - uses: docker://ghcr.io/fluidattacks/makes:22.06
+        name: /formatNix
+        with:
+          set-safe-directory: "/github/workspace"
+          args: m . /formatNix
+
+  formatPython:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+      - uses: docker://ghcr.io/fluidattacks/makes:22.06
+        name: /formatPython
+        with:
+          set-safe-directory: "/github/workspace"
+          args: m . /formatPython
+
+  lintGitCommitMsg:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+        with:
+          fetch-depth: 0
+      - uses: docker://ghcr.io/fluidattacks/makes:22.06
+        name: /lintGitCommitMsg
+        with:
+          set-safe-directory: "/github/workspace"
+          args: m . /lintGitCommitMsg
+
+  lintGitMailMap:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+        with:
+          fetch-depth: 0
+      - uses: docker://ghcr.io/fluidattacks/makes:22.06
+        name: /lintGitMailMap
+        with:
+          set-safe-directory: "/github/workspace"
+          args: m . /lintGitMailMap
+
+  lintNix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+      - uses: docker://ghcr.io/fluidattacks/makes:22.06
+        name: /lintNix
+        with:
+          set-safe-directory: "/github/workspace"
+          args: m . /lintNix
+
+  lintPython_module_api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+      - uses: docker://ghcr.io/fluidattacks/makes:22.06
+        name: /lintPython/module/api
+        with:
+          set-safe-directory: "/github/workspace"
+          args: m . /lintPython/module/api
+
+  lintWithLizard_api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+      - uses: docker://ghcr.io/fluidattacks/makes:22.06
+        name: /lintWithLizard/api
+        with:
+          set-safe-directory: "/github/workspace"
+          args: m . /lintWithLizard/api
+
+  securePythonWithBandit_api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+      - uses: docker://ghcr.io/fluidattacks/makes:22.06
+        name: /securePythonWithBandit/api
+        with:
+          set-safe-directory: "/github/workspace"
+          args: m . /securePythonWithBandit/api
+name: dev
+on:
+  pull_request:
+    branches: [main]

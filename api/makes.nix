@@ -8,4 +8,13 @@
       };
     };
   };
+  lintWithLizard = {
+    api = ["/api/src"];
+  };
+  securePythonWithBandit = {
+    api = {
+      python = "3.9";
+      target = "/api/src";
+    };
+  };
 }
