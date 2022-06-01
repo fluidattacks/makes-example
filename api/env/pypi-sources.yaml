@@ -1,0 +1,105 @@
+closure:
+  anyio: 3.6.1
+  asgiref: 3.5.2
+  click: 8.1.3
+  colorama: 0.4.4
+  fastapi: 0.78.0
+  h11: 0.13.0
+  idna: "3.3"
+  pydantic: 1.9.1
+  sniffio: 1.2.0
+  starlette: 0.19.1
+  typing-extensions: 4.2.0
+  uvicorn: 0.17.6
+links:
+  - name: anyio-3.6.1-py3-none-any.whl
+    sha256: 1gm7r70cdmyh8i9rjz9d619nji0k2xchk8w7iyd6ll100v3vjafb
+    url: https://files.pythonhosted.org/packages/c3/22/4cba7e1b4f45ffbefd2ca817a6800ba1c671c26f288d7705f20289872012/anyio-3.6.1-py3-none-any.whl
+  - name: anyio-3.6.1.tar.gz
+    sha256: 02yx5yczk50q133543salrjsg9ds8gpg69d9mr1f91iqz6axyfj1
+    url: https://files.pythonhosted.org/packages/67/c4/fd50bbb2fb72532a4b778562e28ba581da15067cfb2537dbd3a2e64689c1/anyio-3.6.1.tar.gz
+  - name: asgiref-3.5.2-py3-none-any.whl
+    sha256: 1i7sbb887dysd7ymgamjb7lhq44rgcmxpw9nj4l5g1xfjavq0a0x
+    url: https://files.pythonhosted.org/packages/af/6d/ea3a5c3027c3f14b0321cd4f7e594c776ebe64e4b927432ca6917512a4f7/asgiref-3.5.2-py3-none-any.whl
+  - name: asgiref-3.5.2.tar.gz
+    sha256: 095437y6f9np0ii9yvwfqqbr4gfwq4wdnh363nzhkgnfd8m3caaa
+    url: https://files.pythonhosted.org/packages/1f/35/e7d59b92ceffb1dc62c65156278de378670b46ab2364a3ea7216fe194ba3/asgiref-3.5.2.tar.gz
+  - name: click-8.1.3-py3-none-any.whl
+    sha256: 0j6vn6ayxq1bqs1v64r90sarg05hj6rxj4w29vs0k9hmrcrq2kdv
+    url: https://files.pythonhosted.org/packages/c2/f1/df59e28c642d583f7dacffb1e0965d0e00b218e0186d7858ac5233dce840/click-8.1.3-py3-none-any.whl
+  - name: click-8.1.3.tar.gz
+    sha256: 13kvp8visj5xh9d43brnda6q0kc1s40flxa5cw0p0a9hzf5dr0kn
+    url: https://files.pythonhosted.org/packages/59/87/84326af34517fca8c58418d148f2403df25303e02736832403587318e9e8/click-8.1.3.tar.gz
+  - name: colorama-0.4.4-py2.py3-none-any.whl
+    sha256: 1qn3bnyd7gdwkyk8nvlhiy3c6zbwjd49fjxj0gp8xxi9faiysiwz
+    url: https://files.pythonhosted.org/packages/44/98/5b86278fbbf250d239ae0ecb724f8572af1c91f4a11edf4d36a206189440/colorama-0.4.4-py2.py3-none-any.whl
+  - name: colorama-0.4.4.tar.gz
+    sha256: 16w62sm95hmh55rqxn4zwdz0bkh3fqm1qnz9cwi3s510iasb4har
+    url: https://files.pythonhosted.org/packages/1f/bb/5d3246097ab77fa083a61bd8d3d527b7ae063c7d8e8671b1cf8c4ec10cbe/colorama-0.4.4.tar.gz
+  - name: fastapi-0.78.0-py3-none-any.whl
+    sha256: 0rbgknvbmqxvzsk66d2hw1g3ghmzhjryk3bxmskny9lcqzaspz0m
+    url: https://files.pythonhosted.org/packages/61/0f/427f0af121b226e62237e430f5bf4485e0ae1565b3f5b782613b59f30abc/fastapi-0.78.0-py3-none-any.whl
+  - name: fastapi-0.78.0.tar.gz
+    sha256: 10vag33b5ab66qqjnwpz4b8vsf2ypfjg2alfcmw8a0dsi6kx8crj
+    url: https://files.pythonhosted.org/packages/b7/2a/4676736c3b1864ca483265db43cad9710b83a95c2530aa6bfe671b83fd46/fastapi-0.78.0.tar.gz
+  - name: h11-0.13.0-py3-none-any.whl
+    sha256: 0hklkqvhmrvcnkzvwa0qjdwkqzgj1bn43kf88r9sag337db7ipcd
+    url: https://files.pythonhosted.org/packages/19/d2/32a15a4955be1b8114a1c570999eefd31279c7f9aa2d2a43d492a79b53c5/h11-0.13.0-py3-none-any.whl
+  - name: h11-0.13.0.tar.gz
+    sha256: 01pzawwhr537ypm966hli0hspzw104d0xk1q9n528yh86l8kr0bh
+    url: https://files.pythonhosted.org/packages/fa/a6/450568b2d62dd633be53f69890332bb0ce78183ffbe1e514c2b3102efff5/h11-0.13.0.tar.gz
+  - name: idna-3.3-py3-none-any.whl
+    sha256: 1zrm4xnjas13byafi11ma2q8h5rr1fmjwvi41xp5k07sgw2dvnc4
+    url: https://files.pythonhosted.org/packages/04/a2/d918dcd22354d8958fe113e1a3630137e0fc8b44859ade3063982eacd2a4/idna-3.3-py3-none-any.whl
+  - name: idna-3.3.tar.gz
+    sha256: 0v8f6qjfi5i7qc5icsbv2pi24qy6k6m8wjqjvdf2sxjvlpq3yr4x
+    url: https://files.pythonhosted.org/packages/62/08/e3fc7c8161090f742f504f40b1bccbfc544d4a4e09eb774bf40aafce5436/idna-3.3.tar.gz
+  - name: pydantic-1.9.1-cp39-cp39-macosx_10_9_x86_64.whl
+    sha256: 1mnhv3209vh1r2gvb20kraka7bkibs37dvafkncgl7f9bf1a6fxq
+    url: https://files.pythonhosted.org/packages/9a/a2/585b1a747b7bbb22392fe9c875b8adfaaee9a7be506fbb66a749157f9099/pydantic-1.9.1-cp39-cp39-macosx_10_9_x86_64.whl
+  - name: pydantic-1.9.1-cp39-cp39-macosx_11_0_arm64.whl
+    sha256: 047q054nc1aiqsjv1mcnl7l26i61zk98hrm40jfxi302mp5zxn0x
+    url: https://files.pythonhosted.org/packages/ed/30/cc6081090e0653b8bfeac45b5973027771050813c4ac167a277f4f355242/pydantic-1.9.1-cp39-cp39-macosx_11_0_arm64.whl
+  - name: pydantic-1.9.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+    sha256: 07q9g85iv1y1d757pnhnhshrmb0nk6755nzl7wd732r6hxqgvvh2
+    url: https://files.pythonhosted.org/packages/5f/76/11635fe2d808c0062f4f23a6ac6453e6110d3446fb196e3b6dfc1d15f979/pydantic-1.9.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+  - name: pydantic-1.9.1-cp39-cp39-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl
+    sha256: 1vmc5583gyywcbjk6sfsmmcwa2nqjcw3gwiarjvc1fi916lppdby
+    url: https://files.pythonhosted.org/packages/c4/d2/6118efdb9fdaf3d4dfecc0276d4d47a1ef9aaf9903fa49f1ece765d917cb/pydantic-1.9.1-cp39-cp39-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl
+  - name: pydantic-1.9.1-cp39-cp39-musllinux_1_1_i686.whl
+    sha256: 0q871774ah6jg9iay6jmq612d00jjvpdc0rvxi5k8v7lj6gaxsac
+    url: https://files.pythonhosted.org/packages/81/48/b3c8cb4eb7106b612bbfc263d557b75e27d2720a0cf2c442ea67950d6d43/pydantic-1.9.1-cp39-cp39-musllinux_1_1_i686.whl
+  - name: pydantic-1.9.1-cp39-cp39-musllinux_1_1_x86_64.whl
+    sha256: 1z81nxcsxicspzx0frsjxm9akvnrhdvc642cq1zvk6hcpwcb7k3j
+    url: https://files.pythonhosted.org/packages/2e/6b/7ae3031fc86b974296ef3a91221aec46fdf66a8dd6ba1d300151a812c5b3/pydantic-1.9.1-cp39-cp39-musllinux_1_1_x86_64.whl
+  - name: pydantic-1.9.1-py3-none-any.whl
+    sha256: 0n5xyfb37s6g511fhpfw9bl6qr2lknf5cbzysbfskgs27kqw1229
+    url: https://files.pythonhosted.org/packages/f3/88/78666bfe38d3a8aee75fbd2410ac6e26dfdd64585323c07648f387817c76/pydantic-1.9.1-py3-none-any.whl
+  - name: pydantic-1.9.1.tar.gz
+    sha256: 06k9n0nkybg236hqk67gwam11lvshzma78ryikyzgzr9zz1qgn8y
+    url: https://files.pythonhosted.org/packages/d0/a5/e4a25a0becf35530a3d90459a88855743e942f2e502da49ca5b10aa78568/pydantic-1.9.1.tar.gz
+  - name: sniffio-1.2.0-py3-none-any.whl
+    sha256: 0qznm5f0zg3n6vnkwjm54968397ln8mpbqhclh92275cirlp26s7
+    url: https://files.pythonhosted.org/packages/52/b0/7b2e028b63d092804b6794595871f936aafa5e9322dcaaad50ebf67445b3/sniffio-1.2.0-py3-none-any.whl
+  - name: sniffio-1.2.0.tar.gz
+    sha256: 1pnkvi6wvn4qd37y69n1ls6n8l63gfmn3pvb1jb50gqxxkn6wrn4
+    url: https://files.pythonhosted.org/packages/a6/ae/44ed7978bcb1f6337a3e2bef19c941de750d73243fc9389140d62853b686/sniffio-1.2.0.tar.gz
+  - name: starlette-0.19.1-py3-none-any.whl
+    sha256: 1gvrha4da13phzh9kq4mjml3lxwrjc6aldk1akmsiwsis31caq2s
+    url: https://files.pythonhosted.org/packages/f1/9d/1fa96008b302dd3e398f89f3fc5afb19fb0b0f341fefa05c65b3a38d64cf/starlette-0.19.1-py3-none-any.whl
+  - name: starlette-0.19.1.tar.gz
+    sha256: 1ir4gva97mcsxnj3xh8xpyijpr86fxmvhhddmhwrdjsffyb11ln6
+    url: https://files.pythonhosted.org/packages/2b/18/405f4fb59119b8efa203c10a04a32a927976b5450cf649c8b4c9d079d21e/starlette-0.19.1.tar.gz
+  - name: typing_extensions-4.2.0-py3-none-any.whl
+    sha256: 020pgkh5ay36plypaksgcgmyfx58a9cc0mbxyqchs5wpw975jmv6
+    url: https://files.pythonhosted.org/packages/75/e1/932e06004039dd670c9d5e1df0cd606bf46e29a28e65d5bb28e894ea29c9/typing_extensions-4.2.0-py3-none-any.whl
+  - name: typing_extensions-4.2.0.tar.gz
+    sha256: 0xi3y276dcwb6yb21f94d178j1d1nbkaa5vyy1kin3fsl1aldhpi
+    url: https://files.pythonhosted.org/packages/fe/71/1df93bd59163c8084d812d166c907639646e8aac72886d563851b966bf18/typing_extensions-4.2.0.tar.gz
+  - name: uvicorn-0.17.6-py3-none-any.whl
+    sha256: 19k1p7aqxr7w464jpk8sd5wv8azpsakpj6pb04f5iicsdkls1qhr
+    url: https://files.pythonhosted.org/packages/36/ab/c13847c53d0624ee5a2e19c9c8d19a8cea5f865b95d08b839fac375a9e83/uvicorn-0.17.6-py3-none-any.whl
+  - name: uvicorn-0.17.6.tar.gz
+    sha256: 08zw7fn91vl30mnzk5wy93459psycymw995487c4f5v1b78gk02i
+    url: https://files.pythonhosted.org/packages/6d/7d/b97c120cad5fd1f66462afb0d5ddd043078f2380b89fccd8a97ef5c95b5c/uvicorn-0.17.6.tar.gz
+python: "3.9"
