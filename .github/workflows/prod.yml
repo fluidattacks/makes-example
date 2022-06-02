@@ -12,6 +12,8 @@ jobs:
         with:
           set-safe-directory: "/github/workspace"
           args: m . /formatMarkdown
+        env:
+          CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
   formatNix:
     runs-on: ubuntu-latest
@@ -22,6 +24,8 @@ jobs:
         with:
           set-safe-directory: "/github/workspace"
           args: m . /formatNix
+        env:
+          CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
   formatPython:
     runs-on: ubuntu-latest
@@ -32,6 +36,8 @@ jobs:
         with:
           set-safe-directory: "/github/workspace"
           args: m . /formatPython
+        env:
+          CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
   lintGitCommitMsg:
     runs-on: ubuntu-latest
@@ -44,6 +50,8 @@ jobs:
         with:
           set-safe-directory: "/github/workspace"
           args: m . /lintGitCommitMsg
+        env:
+          CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
   lintGitMailMap:
     runs-on: ubuntu-latest
@@ -56,6 +64,8 @@ jobs:
         with:
           set-safe-directory: "/github/workspace"
           args: m . /lintGitMailMap
+        env:
+          CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
   lintMarkdown_readme:
     runs-on: ubuntu-latest
@@ -66,6 +76,8 @@ jobs:
         with:
           set-safe-directory: "/github/workspace"
           args: m . /lintMarkdown/readme
+        env:
+          CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
   lintNix:
     runs-on: ubuntu-latest
@@ -76,6 +88,8 @@ jobs:
         with:
           set-safe-directory: "/github/workspace"
           args: m . /lintNix
+        env:
+          CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
   lintPython_module_api:
     runs-on: ubuntu-latest
@@ -86,6 +100,8 @@ jobs:
         with:
           set-safe-directory: "/github/workspace"
           args: m . /lintPython/module/api
+        env:
+          CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
   lintWithLizard_api:
     runs-on: ubuntu-latest
@@ -96,6 +112,8 @@ jobs:
         with:
           set-safe-directory: "/github/workspace"
           args: m . /lintWithLizard/api
+        env:
+          CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
   securePythonWithBandit_api:
     runs-on: ubuntu-latest
@@ -106,6 +124,8 @@ jobs:
         with:
           set-safe-directory: "/github/workspace"
           args: m . /securePythonWithBandit/api
+        env:
+          CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 name: prod
 on:
   push:
