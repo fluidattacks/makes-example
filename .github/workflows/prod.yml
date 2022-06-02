@@ -106,7 +106,7 @@ jobs:
         with:
           set-safe-directory: "/github/workspace"
           args: m . /securePythonWithBandit/api
-name: dev
+name: prod
 on:
-  pull_request:
+  push:
     branches: [main]
