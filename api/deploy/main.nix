@@ -10,11 +10,10 @@ makeScript {
   };
   searchPaths = {
     bin = [
+      inputs.nixpkgs.curl
       inputs.nixpkgs.docker
-      inputs.nixpkgs.git
-      inputs.nixpkgs.gnugrep
-      inputs.nixpkgs.heroku
-      inputs.nixpkgs.jq
+      inputs.nixpkgs.docker-compose
+      inputs.nixpkgs.gnutar
     ];
   };
   entrypoint = ./entrypoint.sh;
