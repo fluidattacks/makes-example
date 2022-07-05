@@ -3,6 +3,18 @@ concurrency:
   cancel-in-progress: true
   group: ${{ github.actor }}
 jobs:
+  formatBash:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+        with:
+          fetch-depth: 0
+      - uses: docker://ghcr.io/fluidattacks/makes:22.07
+        name: /formatBash
+        with:
+          set-safe-directory: "/github/workspace"
+          args: m . /formatBash
+
   formatMarkdown:
     runs-on: ubuntu-latest
     steps:
@@ -32,6 +44,18 @@ jobs:
         with:
           set-safe-directory: "/github/workspace"
           args: m . /formatPython
+
+  lintBash:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+        with:
+          fetch-depth: 0
+      - uses: docker://ghcr.io/fluidattacks/makes:22.07
+        name: /lintBash
+        with:
+          set-safe-directory: "/github/workspace"
+          args: m . /lintBash
 
   lintGitCommitMsg:
     runs-on: ubuntu-latest

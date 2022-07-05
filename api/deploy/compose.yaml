@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  app:
+    image: ghcr.io/fluidattacks/makes:22.07
+    entrypoint:
+      - "m"
+      - "github:dsalaza4/makes-example@main"
+      - "/api"
+    ports:
+      - "8080"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.test.rule=Host(`yuaaxr.stackhero-network.com`)"
+      - "traefik.http.routers.test.tls.certresolver=letsencrypt"

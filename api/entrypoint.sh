@@ -1,10 +1,8 @@
 # shellcheck shell=bash
 
 function main {
-  local port="${PORT:-8000}"
-
   pushd "__argApiSrc__" \
-    && uvicorn main:app --reload --port "${port}"
+    && uvicorn main:app --reload --host "0.0.0.0" --port "8080"
 }
 
 main "${@}"

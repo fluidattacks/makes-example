@@ -1,30 +1,28 @@
 # shellcheck shell=bash
 
-function app_exists {
-  local env="${1}"
+function stackhero_login {
+  local tmp
+  local stackhero_host="yuaaxr.stackhero-network.com"
+  local certificates="https://docker:${STACKHERO_PASSWORD}@${stackhero_host}/stackhero/docker/certificates.tar"
 
-  heroku apps --json | jq -rec ".[].name" | grep -q "${env}"
-}
-
-function create_app {
-  local env="${1}"
-
-  heroku apps:create "${env}" \
-    && heroku stack:set --app "${env}" "container" \
-    && heroku container:push --app "${env}" web
+  tmp=$(mktemp -d) \
+    && pushd "${tmp}" \
+    && curl -o certificates.tar "${certificates}" \
+    && tar -xf certificates.tar \
+    && (docker context rm -f ${stackhero_host} 2> /dev/null || true) \
+    && docker context create ${stackhero_host} \
+      --description "${STACKHERO_SERVICE_ID} (${stackhero_host})" \
+      --docker "host=tcp://${stackhero_host}:2376,ca=ca.pem,cert=cert.pem,key=key.pem" \
+    && popd \
+    && docker context use "${stackhero_host}"
 }
 
 function main {
   local env="makes-example-${1}"
 
   pushd "__argApiDeploy__" \
-    && heroku auth:whoami \
-    && heroku container:login \
-    && if ! app_exists "${env}"; then
-      info "It seems like a Heroku app for ${env} does not exist. We will create it." \
-        && create_app "${env}"
-    fi \
-    && heroku container:release --app "${env}" web
+    && stackhero_login \
+    && docker-compose -p "${env}" up -d
 }
 
 main "${@}"
