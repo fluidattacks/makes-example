@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-      - uses: docker://ghcr.io/fluidattacks/makes:22.06
+      - uses: docker://ghcr.io/fluidattacks/makes:22.07
         name: /formatMarkdown
         with:
           set-safe-directory: "/github/workspace"
@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-      - uses: docker://ghcr.io/fluidattacks/makes:22.06
+      - uses: docker://ghcr.io/fluidattacks/makes:22.07
         name: /formatNix
         with:
           set-safe-directory: "/github/workspace"
@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-      - uses: docker://ghcr.io/fluidattacks/makes:22.06
+      - uses: docker://ghcr.io/fluidattacks/makes:22.07
         name: /formatPython
         with:
           set-safe-directory: "/github/workspace"
@@ -45,7 +45,7 @@ jobs:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
         with:
           fetch-depth: 0
-      - uses: docker://ghcr.io/fluidattacks/makes:22.06
+      - uses: docker://ghcr.io/fluidattacks/makes:22.07
         name: /lintGitCommitMsg
         with:
           set-safe-directory: "/github/workspace"
@@ -59,7 +59,7 @@ jobs:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
         with:
           fetch-depth: 0
-      - uses: docker://ghcr.io/fluidattacks/makes:22.06
+      - uses: docker://ghcr.io/fluidattacks/makes:22.07
         name: /lintGitMailMap
         with:
           set-safe-directory: "/github/workspace"
@@ -71,7 +71,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-      - uses: docker://ghcr.io/fluidattacks/makes:22.06
+      - uses: docker://ghcr.io/fluidattacks/makes:22.07
         name: /lintMarkdown/readme
         with:
           set-safe-directory: "/github/workspace"
@@ -83,7 +83,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-      - uses: docker://ghcr.io/fluidattacks/makes:22.06
+      - uses: docker://ghcr.io/fluidattacks/makes:22.07
         name: /lintNix
         with:
           set-safe-directory: "/github/workspace"
@@ -95,7 +95,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-      - uses: docker://ghcr.io/fluidattacks/makes:22.06
+      - uses: docker://ghcr.io/fluidattacks/makes:22.07
         name: /lintPython/module/api
         with:
           set-safe-directory: "/github/workspace"
@@ -107,7 +107,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-      - uses: docker://ghcr.io/fluidattacks/makes:22.06
+      - uses: docker://ghcr.io/fluidattacks/makes:22.07
         name: /lintWithLizard/api
         with:
           set-safe-directory: "/github/workspace"
@@ -119,7 +119,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-      - uses: docker://ghcr.io/fluidattacks/makes:22.06
+      - uses: docker://ghcr.io/fluidattacks/makes:22.07
         name: /securePythonWithBandit/api
         with:
           set-safe-directory: "/github/workspace"
