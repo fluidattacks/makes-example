@@ -14,8 +14,5 @@ makeScript {
     bin = [inputs.nixpkgs.python39];
     source = [outputs."/api/env"];
   };
-  entrypoint = ''
-    pushd "__argApiSrc__" \
-      && uvicorn main:app --reload
-  '';
+  entrypoint = ./entrypoint.sh;
 }
