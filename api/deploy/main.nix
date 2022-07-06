@@ -13,6 +13,7 @@ makeScript {
       inputs.nixpkgs.curl
       inputs.nixpkgs.docker
       inputs.nixpkgs.docker-compose
+      inputs.nixpkgs.envsubst
       inputs.nixpkgs.gnutar
     ];
   };
