@@ -28,7 +28,7 @@ function stackhero_deploy {
 }
 
 function main {
-  export USER="${GITHUB_REPOSITORY_OWNER}"
+  export USER="${GITHUB_HEAD_REF}"
   local env="makes-example-${USER}"
 
   pushd "__argApiDeploy__" \
