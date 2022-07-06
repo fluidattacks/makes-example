@@ -1,6 +1,8 @@
 # shellcheck shell=bash
 
 function stackhero_login {
+  export STACKHERO_SERVICE_ID
+  export STACKHERO_PASSWORD
   local tmp
   local stackhero_host="yuaaxr.stackhero-network.com"
   local certificates="https://docker:${STACKHERO_PASSWORD}@${stackhero_host}/stackhero/docker/certificates.tar"
@@ -17,12 +19,21 @@ function stackhero_login {
     && docker context use "${stackhero_host}"
 }
 
+function stackhero_deploy {
+  local file="${1}"
+  local env="${2}"
+
+  envsubst -no-unset -no-empty -i "${file}" \
+    | docker-compose --tlsverify -f "${file}" -p "${env}" up -d
+}
+
 function main {
-  local env="makes-example-${1}"
+  export USER="${GITHUB_REPOSITORY_OWNER}"
+  local env="makes-example-${USER}"
 
   pushd "__argApiDeploy__" \
     && stackhero_login \
-    && docker-compose -p "${env}" up -d
+    && stackhero_deploy "./compose.yaml" "${env}"
 }
 
 main "${@}"
