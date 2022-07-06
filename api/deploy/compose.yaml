@@ -11,6 +11,7 @@ services:
       - "8080"
     labels:
       - "traefik.enable=true"
+      - "traefik.http.middlewares.makes-example-${USER}.stripprefix.prefixes=/${USER}"
       - "traefik.http.routers.makes-example-${USER}.tls.certresolver=letsencrypt"
       - "traefik.http.routers.makes-example-${USER}.rule=Host(`yuaaxr.stackhero-network.com`) && PathPrefix(`/${USER}`)"
-      - "traefik.http.middlewares.makes-example-${USER}.stripprefix.prefixes=/${USER}"
+      - "traefik.http.routers.makes-example-${USER}.middlewares=makes-example-${USER}"

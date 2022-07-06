@@ -10,6 +10,7 @@ function stackhero_login {
   tmp=$(mktemp -d) \
     && pushd "${tmp}" \
     && curl -o certificates.tar "${certificates}" \
+    && cat certificates.tar \
     && tar -xf certificates.tar \
     && (docker context rm -f ${stackhero_host} 2> /dev/null || true) \
     && docker context create ${stackhero_host} \
