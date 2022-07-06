@@ -4,7 +4,7 @@ services:
     image: ghcr.io/fluidattacks/makes:22.07
     entrypoint:
       - "m"
-      - "github:${BRANCH}/makes-example@main"
+      - "github:fluidattacks/makes-example@${BRANCH}"
       - "/api"
       - "${BRANCH}"
     ports:
