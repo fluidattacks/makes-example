@@ -13,7 +13,7 @@ jobs:
         name: /api/deploy
         with:
           set-safe-directory: "/github/workspace"
-          args: m . /api/deploy
+          args: m . /api/deploy dev
         env:
           STACKHERO_SERVICE_ID: ${{ secrets.STACKHERO_SERVICE_ID }}
           STACKHERO_PASSWORD: ${{ secrets.STACKHERO_PASSWORD }}

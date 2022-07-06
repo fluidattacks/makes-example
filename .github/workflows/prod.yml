@@ -13,7 +13,7 @@ jobs:
         name: /api/deploy
         with:
           set-safe-directory: "/github/workspace"
-          args: m . /api/deploy
+          args: m . /api/deploy prod
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
           STACKHERO_SERVICE_ID: ${{ secrets.STACKHERO_SERVICE_ID }}

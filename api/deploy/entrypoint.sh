@@ -28,12 +28,19 @@ function stackhero_deploy {
 }
 
 function main {
-  export USER="${GITHUB_HEAD_REF}"
-  local env="makes-example-${USER}"
+  local env="${1}"
+  export BRANCH
 
   pushd "__argApiDeploy__" \
+    && if [ "${env}" = "dev" ]; then
+      BRANCH="${GITHUB_HEAD_REF}"
+    elif [ "${env}" = "prod" ]; then
+      BRANCH="main"
+    else
+      error "You must pass either 'dev' or 'prod' as arguments."
+    fi \
     && stackhero_login \
-    && stackhero_deploy "./compose.yaml" "${env}"
+    && stackhero_deploy "./compose.yaml" "makes-example-${BRANCH}"
 }
 
 main "${@}"
