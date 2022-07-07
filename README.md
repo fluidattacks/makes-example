@@ -194,8 +194,8 @@ Let's review one of the builtins used:
 ```
 
 The [formatPython](https://github.com/fluidattacks/makes#formatpython) builtin
-uses [Black][BLACK] to format
-all files with `.py` extension within the specified path `/`.
+formats all files
+with `.py` extension within the specified path `/`.
 
 Let's try running it!
 
@@ -631,8 +631,6 @@ on both local and remote environments.
 
 ## References
 
-- [BLACK]: https://black.readthedocs.io/en/stable/
-  [Black][BLACK]
 - [CACHIX]: https://www.cachix.org/
   [Cachix][CACHIX]
 - [DOCKER]: https://www.docker.com/
