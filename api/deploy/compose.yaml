@@ -14,10 +14,10 @@ services:
       - "m"
       - "github:fluidattacks/makes-example@${BRANCH}"
       - "/api"
-      - "${BRANCH}"
+      - "${PATH_PREFIX}"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.middlewares.makes-example-${BRANCH}.stripprefix.prefixes=/${BRANCH}"
+      - "traefik.http.middlewares.makes-example-${BRANCH}.stripprefix.prefixes=${PATH_PREFIX}"
       - "traefik.http.routers.makes-example-${BRANCH}.tls.certresolver=letsencrypt"
-      - "traefik.http.routers.makes-example-${BRANCH}.rule=Host(`yuaaxr.stackhero-network.com`) && PathPrefix(`/${BRANCH}`)"
+      - "traefik.http.routers.makes-example-${BRANCH}.rule=Host(`makes.fluidattacks.com`) && PathPrefix(`${PATH_PREFIX}`)"
       - "traefik.http.routers.makes-example-${BRANCH}.middlewares=makes-example-${BRANCH}"
