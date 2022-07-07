@@ -24,7 +24,7 @@ function stackhero_deploy {
   local env="${2}"
 
   envsubst -no-unset -no-empty -i "${file}" \
-    | docker-compose --tlsverify -f "${file}" -p "${env}" up -d
+    | docker-compose --tlsverify -f "${file}" -p "${env}" up --remove-orphans --force-recreate -d
 }
 
 function main {

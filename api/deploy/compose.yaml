@@ -1,14 +1,20 @@
 version: "3.8"
+networks:
+  app:
+    name: app
+    external: true
 services:
   app:
     image: ghcr.io/fluidattacks/makes:22.07
+    hostname: makes-example-${BRANCH}
+    container_name: makes-example-${BRANCH}
+    networks: [app]
+    ports: ["8080"]
     entrypoint:
       - "m"
       - "github:fluidattacks/makes-example@${BRANCH}"
       - "/api"
       - "${BRANCH}"
-    ports:
-      - "8080"
     labels:
       - "traefik.enable=true"
       - "traefik.http.middlewares.makes-example-${BRANCH}.stripprefix.prefixes=/${BRANCH}"
