@@ -25,10 +25,11 @@
         - [Using imports](#using-imports)
         - [Configuring the cache](#configuring-the-cache)
     - [The example API](#the-example-api)
-        - [API Environment](#api-environment)
         - [API Source Code](#api-source-code)
+        - [API Environment](#api-environment)
         - [API makes.nix](#api-makesnix)
         - [API main.nix](#api-mainnix)
+        - [API Deployments](#api-deployments)
     - [Running makes on GitHub Actions](#running-makes-on-github-actions)
 - [References](#references)
 
@@ -72,11 +73,10 @@ We will achieve this by implementing:
 
 1. The [FastAPI example](https://fastapi.tiangolo.com/#example).
 1. An isolated, cryptographically-signed environment
-    for running our API.
-1. Development infrastructure
-   for testing our API.
-1. Production infrastructure
-   for deploying our API.
+   for running our API.
+1. Development and production environments
+   for our API using [Stackhero][STACKHERO]
+   and [Docker Compose][DOCKER_COMPOSE].
 1. General purpose linters and formatters
    for ensuring code quality and security.
 1. A distributed cache
@@ -316,6 +316,12 @@ Such paths represent
 the core components required
 to make the API work.
 
+#### API Source Code
+
+The path `api/src`
+contains the source code
+for the example API.
+
 #### API Environment
 
 Under the path `api/env`,
@@ -341,12 +347,6 @@ required by the API to work.
    builtin that returns an isolated environment
    with the specified dependency tree.
    Such environment will be used later on by the API.
-
-#### API Source Code
-
-The path `api/src`
-contains the source code
-for the example API.
 
 #### API makes.nix
 
@@ -487,6 +487,113 @@ If anything within the tree changes,
 [Makes][MAKES] will rebuild everything
 and make sure all signatures are correct.
 
+#### API Deployments
+
+In the `api/deploy` path
+we will find the job
+for deploying the API.
+
+The job takes one of these two parameters
+
+- `dev` will deploy the API to
+   `https://makes.fluidattacks.com/${GITHUB_HEAD_REF}`.
+- `prod` will deploy the API to
+   `https://makes.fluidattacks.com/`.
+
+It requires these external variables to be exported
+
+1. `STACKHERO_SERVICE_ID` (Required)
+   For authenticating to [Stackhero][STACKHERO].
+1. `STACKHERO_PASSWORD` (Required)
+   For authenticating to [Stackhero][STACKHERO].
+1. `GITHUB_HEAD_REF` (Required for `dev`)
+   For setting the URL path.
+
+Its relevant files are
+
+- `compose.yaml` is the [Docker Compose][DOCKER_COMPOSE] file
+   used for deploying
+   an instance of the API.
+   Many of its parameters
+   contain placeholders
+   that will be replaced
+   by the job
+   during execution time.
+- `entrypoint.sh` contains the script for the deploy job.
+  It basically logs in to [Stackhero][STACKHERO],
+  replaces all required placeholders in `compose.yaml`
+  and deploys a new version of the API.
+- `main.nix` provides another
+  [makeScript](https://github.com/fluidattacks/makes#makescript) job
+  like the ones reviewed before.
+
+Let's give it a try!
+
+```bash
+$ export STACKHERO_SERVICE_ID=XXXXXXXXXXX
+$ export STACKHERO_PASSWORD=XXXXXXXXXXX
+$ export GITHUB_HEAD_REF=dsalaza4
+$ m github:fluidattacks/makes-example@dsalaza4 /api/deploy dev
+
+                                    🦄 Makes
+                                  v22.07-linux
+
+─────────────── Fetching github:fluidattacks/makes-example@main ────────────────
+
+Initialized empty Git repository in /tmp/makes-_molt5o0/.git/
+From github:fluidattacks/makes-example@main
+remote: Enumerating objects: 31, done.
+remote: Counting objects: 100% (31/31), done.
+remote: Compressing objects: 100% (27/27), done.
+remote: Total 31 (delta 1), reused 20 (delta 0), pack-reused 0
+Unpacking objects: 100% (31/31), 14.88 KiB | 476.00 KiB/s, done.
+From https://github.com/fluidattacks/makes-example
+ * [new branch]      main       -> main
+Switched to branch 'main'
+
+──────────────────────── Building project configuration ────────────────────────
+
+/nix/store/5rdc529zr6rx9n2g56npbnif3z4xb6c7-config.json
+
+───────────────────────────── Building /api/deploy ─────────────────────────────
+
+these 2 derivations will be built:
+  /nix/store/q0bhl11zsikf2a381lp9hmgg4wffpna6-make-template-for-api-deploy.drv
+  /nix/store/pchwjz1z7qw7d8z6nvpvi3j109k8gch9-api-deploy.drv
+building '/nix/store/q0bhl11zsikf2a381lp9hmgg4wffpna6-make-template-for-api-deploy.drv'...
+building '/nix/store/pchwjz1z7qw7d8z6nvpvi3j109k8gch9-api-deploy.drv'...
+[INFO] Copying files
+/nix/store/v5nj2z092pm0xwhn30k5x3llfqkr78wq-api-deploy
+
+─────────────────────────────────── Running ────────────────────────────────────
+
+/nix/store/dby4nqrn19p065gh7vfyi7w0cmg328sx-deploy /home/dsalazar/fluidattacks/makes-example
+/tmp/tmp.xSaQBmovKs /nix/store/dby4nqrn19p065gh7vfyi7w0cmg328sx-deploy /home/dsalazar/fluidattacks/makes-example
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 10240  100 10240    0     0   8258      0  0:00:01  0:00:01 --:--:--  8264
+/nix/store/dby4nqrn19p065gh7vfyi7w0cmg328sx-deploy /home/dsalazar/fluidattacks/makes-example
+Killing makes-example-dsalaza4 ... done
+Removing makes-example-dsalaza4 ... done
+Network app is external, skipping
+Creating makes-example-dsalaza4 ... done
+
+───────────────────────────────── 🍀 Success! ──────────────────────────────────
+```
+
+After a few minutes,
+when going to https://makes.fluidattacks.com/dsalaza4/docs,
+we get the following:
+
+![Development environment](/static/deploy.png "Development environment")
+
+Deployment jobs for both development and production
+are are supported using [GitHub Actions][GITHUB_ACTIONS].
+Every time a developer opens a pull request,
+a development environment for the API is created.
+Similarly, once that pull request is merged,
+a new version of the API is deployed to production.
+
 ### Running makes on GitHub Actions
 
 As mentioned before,
@@ -530,6 +637,8 @@ on both local and remote environments.
   [Cachix][CACHIX]
 - [DOCKER]: https://www.docker.com/
   [Docker][DOCKER]
+- [DOCKER_COMPOSE]: https://docs.docker.com/compose/
+  [Docker Compose][DOCKER_COMPOSE]
 - [FASTAPI]: https://fastapi.tiangolo.com/
   [FastAPI][FASTAPI]
 - [GITHUB_ACTIONS]: https://docs.github.com/en/actions/
@@ -540,3 +649,5 @@ on both local and remote environments.
   [Nix][NIX]
 - [NIXPKGS]: https://github.com/NixOS/nixpkgs/
   [Nixpkgs][NIXPKGS]
+- [STACKHERO]: https://www.stackhero.io/en/
+  [Stackhero][STACKHERO]

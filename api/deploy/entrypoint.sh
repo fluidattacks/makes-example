@@ -57,18 +57,17 @@ function main {
   export BRANCH
   export PATH_PREFIX
 
-  pushd "__argApiDeploy__" \
-    && if [ "${env}" = "dev" ]; then
-      BRANCH="${GITHUB_HEAD_REF}" \
-        && PATH_PREFIX="/${BRANCH}"
-    elif [ "${env}" = "prod" ]; then
-      BRANCH="main" \
-        && PATH_PREFIX="/"
-    else
-      error "You must pass either 'dev' or 'prod' as arguments."
-    fi \
+  if [ "${env}" = "dev" ]; then
+    BRANCH="${GITHUB_HEAD_REF}" \
+      && PATH_PREFIX="/${BRANCH}"
+  elif [ "${env}" = "prod" ]; then
+    BRANCH="main" \
+      && PATH_PREFIX="/"
+  else
+    error "You must pass either 'dev' or 'prod' as arguments."
+  fi \
     && stackhero_login \
-    && stackhero_deploy "./compose.yaml" "makes-example-${BRANCH}"
+    && stackhero_deploy "__argApiCompose__" "makes-example-${BRANCH}"
 }
 
 main "${@}"

@@ -6,7 +6,7 @@
 makeScript {
   name = "api-deploy";
   replace = {
-    __argApiDeploy__ = ./.;
+    __argApiCompose__ = ./compose.yaml;
   };
   searchPaths = {
     bin = [
