@@ -12,7 +12,7 @@
   };
   formatMarkdown = {
     enable = true;
-    doctocArgs = ["--title" "## Contents"];
+    doctocArgs = ["--title" "# Contents"];
     targets = ["/README.md"];
   };
   formatNix = {
