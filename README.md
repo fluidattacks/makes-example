@@ -1,46 +1,31 @@
 # 🦄 Makes Example
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-## Contents
-
-- [Why](#why)
-    - [Secure](#secure)
-    - [Easy](#easy)
-    - [Fast](#fast)
-    - [Portable](#portable)
-    - [Extensible](#extensible)
-- [How](#how)
-- [Walkthrough](#walkthrough)
-    - [Prerequisites](#prerequisites)
-        - [Concepts](#concepts)
-        - [Software](#software)
-    - [Backbone](#backbone)
-        - [Nix](#nix)
-        - [Nixpkgs](#nixpkgs)
-    - [Running any Makes job](#running-any-makes-job)
-    - [The makes.nix file](#the-makesnix-file)
-        - [Example builtin](#example-builtin)
-        - [Working with a Nixpkgs version](#working-with-a-nixpkgs-version)
-        - [Using imports](#using-imports)
-        - [Configuring the cache](#configuring-the-cache)
-    - [The example API](#the-example-api)
-        - [API Source Code](#api-source-code)
-        - [API Environment](#api-environment)
-        - [API makes.nix](#api-makesnix)
-        - [API main.nix](#api-mainnix)
-        - [API Deployments](#api-deployments)
-    - [Running makes on GitHub Actions](#running-makes-on-github-actions)
-- [References](#references)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+This is the official hands-on example for [Makes][MAKES].
 
 ## Why
 
-The purpose of this example
-is to show how [Makes][MAKES] is:
+Being a framework designed
+to simplify the development
+of secure and high-quality applications,
+[Makes][MAKES] comprises a wide range of functionalities
+that may feel overwhelming
+for those who are just starting
+to learn how to use it.
+
+That is why we created an example
+that focuses on using the most basic
+yet powerful builtins
+[Makes][MAKES] has to offer.
+
+This example simulates a
+real application with
+several deployments a day.
+
+We will show how [Makes][MAKES] is:
 
 ### Secure
+
+[<img src="https://img.shields.io/badge/attr-secure-brightgreen.svg" alt="secure">](#secure)
 
 Direct and indirect dependencies
 for both applications and CI/CD pipelines
@@ -49,20 +34,33 @@ granting an immutable software supply chain.
 
 ### Easy
 
+[<img src="https://img.shields.io/badge/attr-easy-orange.svg" alt="easy">](#easy)
+
 Can be installed with just one command
 and has dozens of generic CI/CD builtins.
 
 ### Fast
+
+[<img src="https://img.shields.io/badge/attr-fast-blueviolet.svg" alt="fast">](#fast)
 
 Supports a distributed
 and completely granular cache.
 
 ### Portable
 
+[<img src="https://img.shields.io/badge/attr-portable-violet.svg" alt="portable">](#portable)
+
 Runs on Docker, VM’s,
 and any linux-based OS.
+Such feature greatly simplifies
+the task of running applications
+and CI/CD jobs
+on both local (developer machines)
+and remote (dev, staging, prod) environments.
 
 ### Extensible
+
+[<img src="https://img.shields.io/badge/attr-extensible-blue.svg" alt="extensible">](#extensible)
 
 Can be extended
 to work with any technology.
@@ -84,38 +82,54 @@ We will achieve this by implementing:
 1. A CI/CD workflow using [GitHub Actions][GITHUB_ACTIONS]
    for orchestrating all the previous items.
 
-## Walkthrough
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+# Contents
 
-The purpose of this walkthrough is to
-provide an in-depth description
-of this example so any developer
-can understand
-the advantages of using [Makes][MAKES]
-and how to use it.
+- [Prerequisites](#prerequisites)
+    - [Concepts](#concepts)
+    - [Software](#software)
+- [Backbone: Nix and Nixpkgs](#backbone-nix-and-nixpkgs)
+- [Running any Makes job](#running-any-makes-job)
+- [Running Makes on containers](#running-makes-on-containers)
+- [The makes.nix file](#the-makesnix-file)
+    - [Example builtin](#example-builtin)
+    - [Working with a Nixpkgs version](#working-with-a-nixpkgs-version)
+    - [Using imports](#using-imports)
+    - [Configuring the cache](#configuring-the-cache)
+- [The example API](#the-example-api)
+    - [API Source Code](#api-source-code)
+    - [API Environment](#api-environment)
+    - [API makes.nix](#api-makesnix)
+    - [API main.nix](#api-mainnix)
+    - [API Deployments](#api-deployments)
+- [References](#references)
 
-### Prerequisites
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-#### Concepts
+# Prerequisites
+
+## Concepts
 
 Having a **basic** understanding of the following concepts
 will probably make this example much easier to grasp.
 
-1. Shell scripting
 1. Continuous Integration and Delivery
 1. Containers
 1. Application dependencies
-1. APIs
-1. Linters
-1. Formatters
+1. Shell scripting
+1. Linters and formatters
 
 Additionally, we will be giving a **very brief** introduction to
 
 1. [Nix][NIX]
 1. [Nixpkgs][NIXPKGS]
 
-These two are foundational components of [Makes][MAKES].
+as they are foundational components of [Makes][MAKES].
 
-#### Software
+## Software
+
+[<img src="https://img.shields.io/badge/attr-easy-orange.svg" alt="easy">](#easy)
 
 You just need to either have
 [Makes](https://github.com/fluidattacks/makes#getting-started)
@@ -123,38 +137,43 @@ or
 [Docker][DOCKER]
 installed on your system.
 
-### Backbone
+# Backbone: Nix and Nixpkgs
+
+[<img src="https://img.shields.io/badge/attr-secure-brightgreen.svg" alt="secure">](#secure)
+[<img src="https://img.shields.io/badge/attr-fast-blueviolet.svg" alt="fast">](#fast)
+[<img src="https://img.shields.io/badge/attr-portable-violet.svg" alt="portable">](#portable)
 
 [Makes][MAKES] relies on some core technology in order to work.
-
-#### Nix
 
 [Nix][NIX] is a package manager
 that treats packages in a purely functional manner.
 Packages are built by functions
 that do not have secondary effects.
 They never change once built.
+It can be be installed on any linux-based OS.
 
 [Makes][MAKES] relies on [Nix][NIX]
 to build reproducible and immutable workflows
-and environments.
+and environments. It also takes advantage of its
+granular cache obtained by having isolated packages.
 
-#### Nixpkgs
-
-According to the documentation,
 [Nixpkgs][NIXPKGS]
 > is a collection of over 80,000 software packages
 > that can be installed with the Nix package manager.
-
 The main advantage of [Nixpkgs][NIXPKGS]
 over other package repositories
-is that all packages are reproducible
-and perfectly pinned to an exact version.
+is that packages are reproducible
+and pinned to an exact commit version.
+Compiled binaries for such pacakges
+are also accesible through `cache.nixos.org`.
 
 [Makes][MAKES] uses [Nixpkgs][NIXPKGS]
-for providing most required dependencies.
+for provisioning OS dependencies.
 
-### Running any Makes job
+# Running any Makes job
+
+[<img src="https://img.shields.io/badge/attr-easy-orange.svg" alt="easy">](#easy)
+[<img src="https://img.shields.io/badge/attr-portable-violet.svg" alt="portable">](#portable)
 
 Makes has the ability
 to fetch any repository that supports it,
@@ -172,7 +191,51 @@ Using [Docker][DOCKER]:
 docker run ghcr.io/fluidattacks/makes:22.07 m github:fluidattacks/makes-example@main
 ```
 
-### The makes.nix file
+# Running Makes on containers
+
+[<img src="https://img.shields.io/badge/attr-easy-orange.svg" alt="easy">](#easy)
+[<img src="https://img.shields.io/badge/attr-portable-violet.svg" alt="portable">](#portable)
+[<img src="https://img.shields.io/badge/attr-extensible-blue.svg" alt="extensible">](#extensible)
+
+As mentioned before,
+[Makes][MAKES] also has a [Docker][DOCKER] container.
+We can take advantage of this
+on [CI/CD providers](https://github.com/fluidattacks/makes#configuring-cicd),
+[Kubernetes][KUBERNETES],
+[Nomad][NOMAD],
+[Stackhero][STACKHERO],
+and basically anything that runs containers.
+
+In this example,
+we have a development
+and a production pipeline
+using [GitHub Actions][GITHUB_ACTIONS].
+Both of them can be found under `.github/workflows`.
+
+Let's take a look at this job in `.github/workflows/dev.yml`:
+
+```yaml
+formatNix:
+   runs-on: ubuntu-latest
+   steps:
+   - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+   - uses: docker://ghcr.io/fluidattacks/makes:22.07
+      name: /formatNix
+      with:
+         set-safe-directory: "/github/workspace"
+         args: m . /formatNix
+```
+
+By looking at this portion of code
+we can see that we use the [Makes][MAKES] container to run the
+`m . /formatNix` command.
+
+Thanks to this feature
+you can make your entire ecosystem reproducible
+on any remote environment
+that supports containers.
+
+# The makes.nix file
 
 You will find this file in the root of the repository.
 According to the [documentation](https://github.com/fluidattacks/makes#makesnix-reference),
@@ -180,7 +243,9 @@ In this file you can specify any [builtin](https://github.com/fluidattacks/makes
 supported by [Makes][MAKES]
 and configure it to run on your project.
 
-#### Example builtin
+## Example builtin
+
+[<img src="https://img.shields.io/badge/attr-easy-orange.svg" alt="easy">](#easy)
 
 Let's review one of the builtins used:
 
@@ -241,7 +306,9 @@ it finds two files,
 specifically the ones contained in `api/src`,
 and validates if they are properly formatted.
 
-#### Working with a Nixpkgs version
+## Working with a Nixpkgs version
+
+[<img src="https://img.shields.io/badge/attr-secure-brightgreen.svg" alt="secure">](#secure)
 
 We can also specify
 what version of [Nixpkgs][NIXPKGS] we want to use
@@ -262,7 +329,10 @@ We can later reference
 this version of nixpkgs
 to install any package we want.
 
-#### Using imports
+## Using imports
+
+[<img src="https://img.shields.io/badge/attr-easy-orange.svg" alt="easy">](#easy)
+[<img src="https://img.shields.io/badge/attr-extensible-blue.svg" alt="extensible">](#extensible)
 
 Another important builtin is:
 
@@ -283,12 +353,16 @@ can be configured by either
 adding it to the main `makes.nix` file
 or to an imported one.
 
-#### Configuring the cache
+## Configuring the cache
 
-We can also configure
-a descentralized [cache](https://github.com/fluidattacks/makes#cache)
+[<img src="https://img.shields.io/badge/attr-secure-brightgreen.svg" alt="secure">](#secure)
+[<img src="https://img.shields.io/badge/attr-easy-orange.svg" alt="easy">](#easy)
+[<img src="https://img.shields.io/badge/attr-fast-blueviolet.svg" alt="fast">](#fast)
+
+A descentralized [cache](https://github.com/fluidattacks/makes#cache)
 for speeding up builds
 that relies on [Cachix][CACHIX]
+can be configured
 
 ```nix
 {
@@ -306,9 +380,9 @@ This allows anyone running [Makes][MAKES]
 to pull already-built [Nix derivations](https://nixos.org/manual/nix/stable/expressions/derivations.html)
 so they don't have to build the same thing twice.
 All derivations are cryptographically signed,
-thus avoiding cache tampering.
+which helps avoiding cache tampering.
 
-### The example API
+# The example API
 
 In the `api` directory
 you will find four relevant paths.
@@ -316,13 +390,17 @@ Such paths represent
 the core components required
 to make the API work.
 
-#### API Source Code
+## API Source Code
 
 The path `api/src`
 contains the source code
 for the example API.
 
-#### API Environment
+## API Environment
+
+[<img src="https://img.shields.io/badge/attr-secure-brightgreen.svg" alt="secure">](#secure)
+[<img src="https://img.shields.io/badge/attr-fast-blueviolet.svg" alt="fast">](#fast)
+[<img src="https://img.shields.io/badge/attr-extensible-blue.svg" alt="extensible">](#extensible)
 
 Under the path `api/env`,
 you will find the implementation
@@ -348,7 +426,21 @@ required by the API to work.
    with the specified dependency tree.
    Such environment will be used later on by the API.
 
-#### API makes.nix
+  Try running `m github:fluidattacks/makes-example@main /api/env`.
+  This will build the API environment.
+  If you run the job again,
+  it will use a cached environment
+  from the previous build.
+  Try changing the `name` input in `main.nix`
+  and running the job again.
+  As one of the inputs changed,
+  the previous cache is no longer valid
+  and a new version of the environment will be built.
+
+## API makes.nix
+
+[<img src="https://img.shields.io/badge/attr-easy-orange.svg" alt="easy">](#easy)
+[<img src="https://img.shields.io/badge/attr-extensible-blue.svg" alt="extensible">](#extensible)
 
 This `makes.nix` file contains several linters
 that run on the API source code.
@@ -375,7 +467,11 @@ previously described.
 The linter needs this environment to
 run some checks like static type checking.
 
-#### API main.nix
+## API main.nix
+
+[<img src="https://img.shields.io/badge/attr-secure-brightgreen.svg" alt="secure">](#secure)
+[<img src="https://img.shields.io/badge/attr-portable-violet.svg" alt="portable">](#portable)
+[<img src="https://img.shields.io/badge/attr-extensible-blue.svg" alt="extensible">](#extensible)
 
 This is where a big part of the magic happens.
 
@@ -417,7 +513,7 @@ Here is a detailed description for every parameter
    By doing this,
    we will be able to reference
    the API source code
-   in an immutable environment.
+   in an semi-isolated environment.
 - `name` just allows to specify
    the name of the job.
 - `searchPaths` implements the [makeSearchPaths](https://github.com/fluidattacks/makes#makesearchpaths)
@@ -483,11 +579,17 @@ granting full portability and ensuring that
 no dependencies are being directly installed on your system.
 The entire dependency tree is fully pinned and
 cryptographically signed.
-If anything within the tree changes,
-[Makes][MAKES] will rebuild everything
-and make sure all signatures are correct.
+If a component changes,
+[Makes][MAKES] will rebuild
+from there downwards,
+reusing all caches that remain unchanged,
+and making sure all signatures are correct.
 
-#### API Deployments
+## API Deployments
+
+[<img src="https://img.shields.io/badge/attr-easy-orange.svg" alt="easy">](#easy)
+[<img src="https://img.shields.io/badge/attr-portable-violet.svg" alt="portable">](#portable)
+[<img src="https://img.shields.io/badge/attr-extensible-blue.svg" alt="extensible">](#extensible)
 
 In the `api/deploy` path
 we will find the job
@@ -532,8 +634,7 @@ Let's give it a try!
 ```bash
 $ export STACKHERO_SERVICE_ID=XXXXXXXXXXX
 $ export STACKHERO_PASSWORD=XXXXXXXXXXX
-$ export GITHUB_HEAD_REF=dsalaza4
-$ m github:fluidattacks/makes-example@dsalaza4 /api/deploy dev
+$ m github:fluidattacks/makes-example@main /api/deploy prod
 
                                     🦄 Makes
                                   v22.07-linux
@@ -573,19 +674,19 @@ building '/nix/store/pchwjz1z7qw7d8z6nvpvi3j109k8gch9-api-deploy.drv'...
                                  Dload  Upload   Total   Spent    Left  Speed
 100 10240  100 10240    0     0   8258      0  0:00:01  0:00:01 --:--:--  8264
 /nix/store/dby4nqrn19p065gh7vfyi7w0cmg328sx-deploy /home/dsalazar/fluidattacks/makes-example
-Killing makes-example-dsalaza4 ... done
-Removing makes-example-dsalaza4 ... done
+Killing makes-example-main ... done
+Removing makes-example-main ... done
 Network app is external, skipping
-Creating makes-example-dsalaza4 ... done
+Creating makes-example-main ... done
 
 ───────────────────────────────── 🍀 Success! ──────────────────────────────────
 ```
 
 After a few minutes,
-when going to https://makes.fluidattacks.com/dsalaza4/docs,
+when going to https://makes.fluidattacks.com/docs,
 we get the following:
 
-![Development environment](/static/deploy.png "Development environment")
+![Production environment](/static/deploy.png "Production environment")
 
 Deployment jobs for both development and production
 are are supported using [GitHub Actions][GITHUB_ACTIONS].
@@ -594,42 +695,7 @@ a development environment for the API is created.
 Similarly, once that pull request is merged,
 a new version of the API is deployed to production.
 
-### Running makes on GitHub Actions
-
-As mentioned before,
-makes can also has a [Docker][DOCKER] container.
-We can take advantage of this on [any CI/CD provider](https://github.com/fluidattacks/makes#configuring-cicd)
-that supports [Docker][DOCKER].
-
-For this example,
-we have a development
-and a production pipeline
-using [GitHub Actions][GITHUB_ACTIONS].
-Both of them can be found under `.github/workflows`.
-
-Let's take a look at this job in `.github/workflows/dev.yml`:
-
-```yaml
-formatNix:
-   runs-on: ubuntu-latest
-   steps:
-   - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-   - uses: docker://ghcr.io/fluidattacks/makes:22.07
-      name: /formatNix
-      with:
-         set-safe-directory: "/github/workspace"
-         args: m . /formatNix
-```
-
-By looking at this portion of code
-we can see that we use the makes container to run the
-`m . /formatNix` command.
-
-Thanks to this feature
-you can make your entire ecosystem reproducible
-on both local and remote environments.
-
-## References
+# References
 
 - [CACHIX]: https://www.cachix.org/
   [Cachix][CACHIX]
@@ -641,11 +707,15 @@ on both local and remote environments.
   [FastAPI][FASTAPI]
 - [GITHUB_ACTIONS]: https://docs.github.com/en/actions/
   [GitHub Actions][GITHUB_ACTIONS]
+- [KUBERNETES]: https://kubernetes.io/
+  [Kubernetes][KUBERNETES]
 - [MAKES]: https://github.com/fluidattacks/makes/
   [Makes][MAKES]
 - [NIX]: https://nixos.org/
   [Nix][NIX]
 - [NIXPKGS]: https://github.com/NixOS/nixpkgs/
   [Nixpkgs][NIXPKGS]
+- [NOMAD]: https://www.nomadproject.io/
+  [Nomad][NOMAD]
 - [STACKHERO]: https://www.stackhero.io/en/
   [Stackhero][STACKHERO]
