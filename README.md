@@ -382,10 +382,13 @@ so they don't have to build the same thing twice.
 All derivations are cryptographically signed,
 which helps avoiding cache tampering.
 
+In case you did not know,
+[Cachix][CACHIX] offers a [free tier for open source projects](https://www.cachix.org/pricing)!
+
 # The example API
 
 In the `api` directory
-you will find four relevant paths.
+you will find several relevant paths.
 Such paths represent
 the core components required
 to make the API work.
@@ -492,10 +495,7 @@ makeScript {
     bin = [inputs.nixpkgs.python39];
     source = [outputs."/api/env"];
   };
-  entrypoint = ''
-    pushd "__argApiSrc__" \
-      && uvicorn main:app --reload
-  '';
+  entrypoint = ./entrypoint.sh;
 }
 ```
 
