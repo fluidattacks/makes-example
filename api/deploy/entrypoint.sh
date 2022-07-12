@@ -53,7 +53,7 @@ function stackhero_deploy {
 }
 
 function main {
-  local env="${1}"
+  local env="${1:-}"
   export BRANCH
   export PATH_PREFIX
 
