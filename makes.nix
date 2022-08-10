@@ -23,6 +23,10 @@
     enable = true;
     targets = ["/"];
   };
+  formatYaml = {
+    enable = true;
+    targets = ["/"];
+  };
   extendingMakesDirs = ["/"];
   imports = [
     ./api/makes.nix

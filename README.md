@@ -191,7 +191,7 @@ m github:fluidattacks/makes-example@main
 Using [Docker][DOCKER]:
 
 ```bash
-docker run ghcr.io/fluidattacks/makes:22.07 m github:fluidattacks/makes-example@main
+docker run ghcr.io/fluidattacks/makes:22.08 m github:fluidattacks/makes-example@main
 ```
 
 # Running Makes on containers
@@ -222,7 +222,7 @@ formatNix:
    runs-on: ubuntu-latest
    steps:
    - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-   - uses: docker://ghcr.io/fluidattacks/makes:22.07
+   - uses: docker://ghcr.io/fluidattacks/makes:22.08
       name: /formatNix
       with:
          set-safe-directory: "/github/workspace"
@@ -271,7 +271,7 @@ Let's try running it!
 $ m github:fluidattacks/makes-example@main /formatPython
 
                               🦄 Makes
-                            v22.07-linux
+                            v22.08-linux
 
 ────────── Fetching github:fluidattacks/makes-example@main ──────────
 
@@ -538,7 +538,7 @@ Let's run it!
 $ m github:fluidattacks/makes-example@main /api
 
                                     🦄 Makes
-                                  v22.07-linux
+                                  v22.08-linux
 
 ─────────────── Fetching github:fluidattacks/makes-example@main ────────────────
 
@@ -640,7 +640,7 @@ $ export STACKHERO_PASSWORD=XXXXXXXXXXX
 $ m github:fluidattacks/makes-example@main /api/deploy prod
 
                                     🦄 Makes
-                                  v22.07-linux
+                                  v22.08-linux
 
 ─────────────── Fetching github:fluidattacks/makes-example@main ────────────────
 
