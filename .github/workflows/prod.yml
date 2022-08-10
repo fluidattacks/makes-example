@@ -1,3 +1,4 @@
+---
 permissions: read-all
 concurrency:
   cancel-in-progress: true
@@ -9,10 +10,10 @@ jobs:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
         with:
           fetch-depth: 0
-      - uses: docker://ghcr.io/fluidattacks/makes:22.07
+      - uses: docker://ghcr.io/fluidattacks/makes:22.08
         name: /api/deploy
         with:
-          set-safe-directory: "/github/workspace"
+          set-safe-directory: /github/workspace
           args: m . /api/deploy prod
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
@@ -25,10 +26,10 @@ jobs:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
         with:
           fetch-depth: 0
-      - uses: docker://ghcr.io/fluidattacks/makes:22.07
+      - uses: docker://ghcr.io/fluidattacks/makes:22.08
         name: /formatBash
         with:
-          set-safe-directory: "/github/workspace"
+          set-safe-directory: /github/workspace
           args: m . /formatBash
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
@@ -37,10 +38,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-      - uses: docker://ghcr.io/fluidattacks/makes:22.07
+      - uses: docker://ghcr.io/fluidattacks/makes:22.08
         name: /formatMarkdown
         with:
-          set-safe-directory: "/github/workspace"
+          set-safe-directory: /github/workspace
           args: m . /formatMarkdown
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
@@ -49,10 +50,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-      - uses: docker://ghcr.io/fluidattacks/makes:22.07
+      - uses: docker://ghcr.io/fluidattacks/makes:22.08
         name: /formatNix
         with:
-          set-safe-directory: "/github/workspace"
+          set-safe-directory: /github/workspace
           args: m . /formatNix
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
@@ -61,10 +62,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-      - uses: docker://ghcr.io/fluidattacks/makes:22.07
+      - uses: docker://ghcr.io/fluidattacks/makes:22.08
         name: /formatPython
         with:
-          set-safe-directory: "/github/workspace"
+          set-safe-directory: /github/workspace
           args: m . /formatPython
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
@@ -75,10 +76,10 @@ jobs:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
         with:
           fetch-depth: 0
-      - uses: docker://ghcr.io/fluidattacks/makes:22.07
+      - uses: docker://ghcr.io/fluidattacks/makes:22.08
         name: /lintBash
         with:
-          set-safe-directory: "/github/workspace"
+          set-safe-directory: /github/workspace
           args: m . /lintBash
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
@@ -89,10 +90,10 @@ jobs:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
         with:
           fetch-depth: 0
-      - uses: docker://ghcr.io/fluidattacks/makes:22.07
+      - uses: docker://ghcr.io/fluidattacks/makes:22.08
         name: /lintGitCommitMsg
         with:
-          set-safe-directory: "/github/workspace"
+          set-safe-directory: /github/workspace
           args: m . /lintGitCommitMsg
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
@@ -103,10 +104,10 @@ jobs:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
         with:
           fetch-depth: 0
-      - uses: docker://ghcr.io/fluidattacks/makes:22.07
+      - uses: docker://ghcr.io/fluidattacks/makes:22.08
         name: /lintGitMailMap
         with:
-          set-safe-directory: "/github/workspace"
+          set-safe-directory: /github/workspace
           args: m . /lintGitMailMap
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
@@ -115,10 +116,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-      - uses: docker://ghcr.io/fluidattacks/makes:22.07
+      - uses: docker://ghcr.io/fluidattacks/makes:22.08
         name: /lintMarkdown/readme
         with:
-          set-safe-directory: "/github/workspace"
+          set-safe-directory: /github/workspace
           args: m . /lintMarkdown/readme
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
@@ -127,10 +128,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-      - uses: docker://ghcr.io/fluidattacks/makes:22.07
+      - uses: docker://ghcr.io/fluidattacks/makes:22.08
         name: /lintNix
         with:
-          set-safe-directory: "/github/workspace"
+          set-safe-directory: /github/workspace
           args: m . /lintNix
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
@@ -139,10 +140,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-      - uses: docker://ghcr.io/fluidattacks/makes:22.07
+      - uses: docker://ghcr.io/fluidattacks/makes:22.08
         name: /lintPython/module/api
         with:
-          set-safe-directory: "/github/workspace"
+          set-safe-directory: /github/workspace
           args: m . /lintPython/module/api
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
@@ -151,10 +152,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-      - uses: docker://ghcr.io/fluidattacks/makes:22.07
+      - uses: docker://ghcr.io/fluidattacks/makes:22.08
         name: /lintWithLizard/api
         with:
-          set-safe-directory: "/github/workspace"
+          set-safe-directory: /github/workspace
           args: m . /lintWithLizard/api
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
@@ -163,10 +164,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-      - uses: docker://ghcr.io/fluidattacks/makes:22.07
+      - uses: docker://ghcr.io/fluidattacks/makes:22.08
         name: /securePythonWithBandit/api
         with:
-          set-safe-directory: "/github/workspace"
+          set-safe-directory: /github/workspace
           args: m . /securePythonWithBandit/api
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
