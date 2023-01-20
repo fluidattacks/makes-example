@@ -11,7 +11,7 @@ from typing import (
 app = FastAPI()
 
 
-class Item(BaseModel):
+class Item(BaseModel):  # pylint: disable=too-few-public-methods
     name: str
     price: float
     is_offer: Union[bool, None] = None
