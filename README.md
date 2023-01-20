@@ -85,25 +85,26 @@ We will achieve this by implementing
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 # Contents
 
 - [Prerequisites](#prerequisites)
-    - [Concepts](#concepts)
-    - [Software](#software)
+  - [Concepts](#concepts)
+  - [Software](#software)
 - [Backbone: Nix and Nixpkgs](#backbone-nix-and-nixpkgs)
 - [Running any Makes job](#running-any-makes-job)
 - [Running Makes on containers](#running-makes-on-containers)
 - [The makes.nix file](#the-makesnix-file)
-    - [Example builtin](#example-builtin)
-    - [Working with a Nixpkgs version](#working-with-a-nixpkgs-version)
-    - [Using imports](#using-imports)
-    - [Configuring the cache](#configuring-the-cache)
+  - [Example builtin](#example-builtin)
+  - [Working with a Nixpkgs version](#working-with-a-nixpkgs-version)
+  - [Using imports](#using-imports)
+  - [Configuring the cache](#configuring-the-cache)
 - [The example API](#the-example-api)
-    - [API Source Code](#api-source-code)
-    - [API Environment](#api-environment)
-    - [API makes.nix](#api-makesnix)
-    - [API main.nix](#api-mainnix)
-    - [API Deployments](#api-deployments)
+  - [API Source Code](#api-source-code)
+  - [API Environment](#api-environment)
+  - [API makes.nix](#api-makesnix)
+  - [API main.nix](#api-mainnix)
+  - [API Deployments](#api-deployments)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
