@@ -255,60 +255,56 @@ Let's review one of the builtins used:
 
 ```nix
 {
-  formatPython = {
+  lintBash = {
     enable = true;
     targets = ["/"];
   };
 }
 ```
 
-The [formatPython](https://github.com/fluidattacks/makes#formatpython) builtin
-formats all files
-with `.py` extension within the specified path `/`.
+The [lintBash](https://github.com/fluidattacks/makes#lintbash) builtin
+lints all `bash` files
+within the specified path `/`.
 
 Let's try running it!
 
 ```bash
-$ m github:fluidattacks/makes-example@main /formatPython
+$ m github:fluidattacks/makes-example@main /lintBash
 
-                              🦄 Makes
-                            v22.11-linux
+                               🦄 Makes
+                             v22.11-linux
 
-────────── Fetching github:fluidattacks/makes-example@main ──────────
+────────── Fetching github:fluidattacks/makes-example@main ───────────
 
-Initialized empty Git repository in /tmp/makes-rbqvoewj/.git/
-remote: Enumerating objects: 26, done.
-remote: Counting objects: 100% (26/26), done.
-remote: Compressing objects: 100% (22/22), done.
-remote: Total 26 (delta 1), reused 20 (delta 0), pack-reused 0
-Unpacking objects: 100% (26/26), 9.05 KiB | 713.00 KiB/s, done.
-From https://github.com/fluidattacks/makes-example
+Initialized empty Git repository in /tmp/makes-a7nxrsao/.git/
+Cached from /home/nixos/.makes/cache/sources/github-fluidattacks-makes-example-main
+remote: Enumerating objects: 33, done.
+remote: Counting objects: 100% (33/33), done.
+remote: Compressing objects: 100% (28/28), done.
+remote: Total 33 (delta 1), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (33/33), 54.52 KiB | 9.09 MiB/s, done.
+From /home/nixos/.makes/cache/sources/github-fluidattacks-makes-example-main
  * [new branch]      main       -> main
 Switched to branch 'main'
 
-────────────────── Building project configuration ───────────────────
+─────────────────── Building project configuration ───────────────────
 
-/nix/store/2mnjjd4gkzrbyr7g97yl19n2y4zv0hi3-config.json
+/nix/store/1z12m8gfyp0wsc9wx9b01vxfci9872hp-config.json
 
-────────────────────── Building /formatPython ───────────────────────
+───────────────────────── Building /lintBash ─────────────────────────
 
-/nix/store/sdxndxx6b2i7427m34x9b2jys748l6kv-format-python
+/nix/store/6nkq7ykmn6l177zri1hh9wdng1q0468x-lint-bash
+───────────────────────────── Provenance ─────────────────────────────
+Attestation: /home/nixos/.makes/provenance-lintBash.json
+SHA-256: 427e69ed2e200ec82cd9bf33fa015d4afa40480020db1cd6a6ea47b91b996147
 
-────────────────────────────── Running ──────────────────────────────
-
-All done! ✨ 🍰 ✨
-2 files left unchanged.
-Skipped 1 files
-
-──────────────────────────── 🏄 Success! ────────────────────────────
+──────────────────────────── 🤙 Success! ─────────────────────────────
 ```
 
 It temporarily clones the provided repository
-and then executes the job that exists within it.
-While executing `/formatPython`,
-it finds two files,
-specifically the ones contained in `api/src`,
-and validates if they are properly formatted.
+and then executes `/lintBash` within it,
+granting compliance with good practices
+in all `bash` files.
 
 ## Working with a Nixpkgs version
 
