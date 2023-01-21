@@ -1,13 +1,13 @@
 # 🦄 Makes Example
 
-This is the official hands-on example for [Makes][MAKES].
+This is the official hands-on example for [Makes][makes].
 
 ## Why
 
 As a framework designed
 to simplify the development
 of secure and high-quality applications,
-[Makes][MAKES] comprises a wide range of functionalities
+[Makes][makes] comprises a wide range of functionalities
 that may nonetheless overwhelm
 those who are just starting
 to learn how to use it.
@@ -15,13 +15,13 @@ to learn how to use it.
 That is why we created an example
 that focuses on using the most basic
 yet powerful builtins
-[Makes][MAKES] has to offer.
+[Makes][makes] has to offer.
 
 This example simulates a
 real application with
 several deployments a day.
 
-We will show how [Makes][MAKES] is:
+We will show how [Makes][makes] is:
 
 ### Secure
 
@@ -74,13 +74,13 @@ We will achieve this by implementing
 1. an isolated, cryptographically-signed environment
    for running our API;
 1. development and production environments
-   for our API using [Stackhero][STACKHERO]
-   and [Docker Compose][DOCKER_COMPOSE];
+   for our API using [Stackhero][stackhero]
+   and [Docker Compose][docker_compose];
 1. general-purpose linters and formatters
    to ensure code quality and security;
 1. a distributed cache
    for high build performance, and
-1. a CI/CD workflow using [GitHub Actions][GITHUB_ACTIONS]
+1. a CI/CD workflow using [GitHub Actions][github_actions]
    for orchestrating all the previous items.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -124,10 +124,10 @@ will probably make this example much easier to grasp:
 
 Below, we give a **very brief** introduction to
 
-1. [Nix][NIX] and
-1. [Nixpkgs][NIXPKGS]
+1. [Nix][nix] and
+1. [Nixpkgs][nixpkgs]
 
-as they are foundational components of [Makes][MAKES].
+as they are foundational components of [Makes][makes].
 
 ## Software
 
@@ -136,7 +136,7 @@ as they are foundational components of [Makes][MAKES].
 You just need to either have
 [Makes](https://github.com/fluidattacks/makes#getting-started)
 or
-[Docker][DOCKER]
+[Docker][docker]
 installed on your system.
 
 # Backbone: Nix and Nixpkgs
@@ -145,9 +145,9 @@ installed on your system.
 [<img src="https://img.shields.io/badge/attr-fast-blueviolet.svg" alt="fast">](#fast)
 [<img src="https://img.shields.io/badge/attr-portable-violet.svg" alt="portable">](#portable)
 
-[Makes][MAKES] relies on some core technology in order to work.
+[Makes][makes] relies on some core technology in order to work.
 
-[Nix][NIX] is a package manager
+[Nix][nix] is a package manager
 that treats packages in a purely functional manner.
 That is,
 packages are built by functions
@@ -160,10 +160,10 @@ to build reproducible and immutable workflows
 and environments. It also takes advantage of its
 granular cache obtained by having isolated packages.
 
-[Nixpkgs][NIXPKGS]
+[Nixpkgs][nixpkgs]
 "is a collection of over 80,000 software packages
 that can be installed with the Nix package manager."
-The main advantage of [Nixpkgs][NIXPKGS]
+The main advantage of [Nixpkgs][nixpkgs]
 over other package repositories
 is that packages are reproducible
 and pinned to an exact commit version.
@@ -189,10 +189,10 @@ Locally:
 m github:fluidattacks/makes-example@main
 ```
 
-Using [Docker][DOCKER]:
+Using [Docker][docker]:
 
 ```bash
-docker run ghcr.io/fluidattacks/makes:22.08 m github:fluidattacks/makes-example@main
+docker run ghcr.io/fluidattacks/makes:22.11 m github:fluidattacks/makes-example@main
 ```
 
 # Running Makes on containers
@@ -202,18 +202,18 @@ docker run ghcr.io/fluidattacks/makes:22.08 m github:fluidattacks/makes-example@
 [<img src="https://img.shields.io/badge/attr-extensible-blue.svg" alt="extensible">](#extensible)
 
 As mentioned before,
-[Makes][MAKES] also has a [Docker][DOCKER] container.
+[Makes][makes] also has a [Docker][docker] container.
 We can take advantage of this
 on [CI/CD providers](https://github.com/fluidattacks/makes#configuring-cicd),
-[Kubernetes][KUBERNETES],
-[Nomad][NOMAD],
-[Stackhero][STACKHERO],
+[Kubernetes][kubernetes],
+[Nomad][nomad],
+[Stackhero][stackhero],
 and basically anything that runs containers.
 
 In this example,
 we have a development
 and a production pipeline
-using [GitHub Actions][GITHUB_ACTIONS].
+using [GitHub Actions][github_actions].
 Both of them can be found under `.github/workflows`.
 
 Let's take a look at this job in `.github/workflows/dev.yml`:
@@ -223,7 +223,7 @@ formatNix:
    runs-on: ubuntu-latest
    steps:
    - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-   - uses: docker://ghcr.io/fluidattacks/makes:22.08
+   - uses: docker://ghcr.io/fluidattacks/makes:22.11
       name: /formatNix
       with:
          set-safe-directory: "/github/workspace"
@@ -231,7 +231,7 @@ formatNix:
 ```
 
 By looking at this portion of code
-we can see that we use the [Makes][MAKES] container to run the
+we can see that we use the [Makes][makes] container to run the
 `m . /formatNix` command.
 
 Thanks to this feature
@@ -244,7 +244,7 @@ that supports containers.
 You will find this file in the root of the repository.
 According to the [documentation](https://github.com/fluidattacks/makes#makesnix-reference),
 in this file you can specify any [builtin](https://github.com/fluidattacks/makes#makesnix-reference)
-supported by [Makes][MAKES]
+supported by [Makes][makes]
 and configure it to run on your project.
 
 ## Example builtin
@@ -272,7 +272,7 @@ Let's try running it!
 $ m github:fluidattacks/makes-example@main /formatPython
 
                               🦄 Makes
-                            v22.08-linux
+                            v22.11-linux
 
 ────────── Fetching github:fluidattacks/makes-example@main ──────────
 
@@ -315,7 +315,7 @@ and validates if they are properly formatted.
 [<img src="https://img.shields.io/badge/attr-secure-brightgreen.svg" alt="secure">](#secure)
 
 We can also specify
-what version of [Nixpkgs][NIXPKGS] we want to use
+what version of [Nixpkgs][nixpkgs] we want to use
 by using [fetchNixpkgs](https://github.com/fluidattacks/makes#fetchnixpkgs).
 
 ```nix
@@ -350,7 +350,7 @@ Another important builtin is:
 
 The `imports` builtin serves a very simple purpose,
 which is being able to specify other `makes.nix` files
-for [Makes][MAKES] to import them.
+for [Makes][makes] to import them.
 
 Any supported builtin
 can be configured by either
@@ -365,7 +365,7 @@ or to an imported one.
 
 A decentralized [cache](https://github.com/fluidattacks/makes#cache)
 for speeding up builds
-that relies on [Cachix][CACHIX]
+that relies on [Cachix][cachix]
 can be configured as follows:
 
 ```nix
@@ -380,14 +380,14 @@ can be configured as follows:
 }
 ```
 
-This allows anyone running [Makes][MAKES]
+This allows anyone running [Makes][makes]
 to pull already-built [Nix derivations](https://nixos.org/manual/nix/stable/expressions/derivations.html)
 so they don't have to build the same thing twice.
 All derivations are cryptographically signed,
 which helps avoid cache tampering.
 
 In case you did not know,
-[Cachix][CACHIX] offers a [free tier for open-source projects](https://www.cachix.org/pricing)!
+[Cachix][cachix] offers a [free tier for open-source projects](https://www.cachix.org/pricing)!
 
 # The example API
 
@@ -416,22 +416,22 @@ for all the dependencies
 required by the API to work.
 
 - `pypi-deps.yaml` contains the dependencies
-   required by the API.
+  required by the API.
 - `pypi-source.yaml` contains a lockfile
-   with the entire dependency tree
-   required by the API.
-   Each dependency is cryptographically signed
-   and points to the exact URL
-   of the expected package.
-   You can use [makePythonLock](https://github.com/fluidattacks/makes#makepythonlock)
-   to generate a lockfile.
+  with the entire dependency tree
+  required by the API.
+  Each dependency is cryptographically signed
+  and points to the exact URL
+  of the expected package.
+  You can use [makePythonLock](https://github.com/fluidattacks/makes#makepythonlock)
+  to generate a lockfile.
 - `main.nix` is the core file
-   for implementing [custom workflows](https://github.com/fluidattacks/makes#mainnix-reference).
-   For this specific example,
-   it implements the [makePythonPypiEnvironment](https://github.com/fluidattacks/makes#makepythonpypienvironment)
-   builtin that returns an isolated environment
-   with the specified dependency tree.
-   This environment will be used later on by the API.
+  for implementing [custom workflows](https://github.com/fluidattacks/makes#mainnix-reference).
+  For this specific example,
+  it implements the [makePythonPypiEnvironment](https://github.com/fluidattacks/makes#makepythonpypienvironment)
+  builtin that returns an isolated environment
+  with the specified dependency tree.
+  This environment will be used later on by the API.
 
   Try running `m github:fluidattacks/makes-example@main /api/env`.
   This will build the API environment.
@@ -508,30 +508,30 @@ for serving the API.
 Here is a detailed description for every parameter
 
 - `replace` allows the creation of placeholders
-   that can later be replaced
-   in the executed script.
-   It uses [projectPath](https://github.com/fluidattacks/makes#projectpath),
-   a builtin that allows creating
-   an immutable version of a path
-   within a repository.
-   By doing this,
-   we will be able to reference
-   the API source code
-   in an semi-isolated environment.
+  that can later be replaced
+  in the executed script.
+  It uses [projectPath](https://github.com/fluidattacks/makes#projectpath),
+  a builtin that allows creating
+  an immutable version of a path
+  within a repository.
+  By doing this,
+  we will be able to reference
+  the API source code
+  in an semi-isolated environment.
 - `name` just allows specifying
-   the name of the job.
+  the name of the job.
 - `searchPaths` implements the [makeSearchPaths](https://github.com/fluidattacks/makes#makesearchpaths)
-   builtin.
-   It allows us to provide
-   all required dependencies
-   to our isolated environment.
-   For the API to run properly,
-   we will bring Python 3.9 from [Nixpkgs][NIXPKGS]
-   and source the [API environment](#api-environment).
+  builtin.
+  It allows us to provide
+  all required dependencies
+  to our isolated environment.
+  For the API to run properly,
+  we will bring Python 3.9 from [Nixpkgs][nixpkgs]
+  and source the [API environment](#api-environment).
 - `entrypoint` is the shell script
-   that will be executed in the job.
-   It basically switches to the API source code directory
-   and runs a webserver for the API.
+  that will be executed in the job.
+  It basically switches to the API source code directory
+  and runs a webserver for the API.
 
 Let's run it!
 
@@ -539,7 +539,7 @@ Let's run it!
 $ m github:fluidattacks/makes-example@main /api
 
                                     🦄 Makes
-                                  v22.08-linux
+                                  v22.11-linux
 
 ─────────────── Fetching github:fluidattacks/makes-example@main ────────────────
 
@@ -578,13 +578,13 @@ That's it!
 Now you can get
 a running environment of the example API
 with just one command, anywhere.
-The entire environment exists within [Nix][NIX],
+The entire environment exists within [Nix][nix],
 granting full portability and ensuring that
 no dependencies are directly installed on your system.
 The entire dependency tree is fully pinned and
 cryptographically signed.
 If a component changes,
-[Makes][MAKES] will rebuild
+[Makes][makes] will rebuild
 from there downwards,
 reusing all caches that remain unchanged
 and making sure all signatures are correct.
@@ -602,14 +602,14 @@ for deploying the API.
 The job takes one of these two parameters
 
 - `dev` will deploy the API to
-   `https://makes.fluidattacks.com/${GITHUB_HEAD_REF}`.
+  `https://makes.fluidattacks.com/${GITHUB_HEAD_REF}`.
 - `prod` will deploy the API to
-   `https://makes.fluidattacks.com/`.
+  `https://makes.fluidattacks.com/`.
 
 It requires these external variables to be exported
 
 - `STACKHERO_SERVICE_ID` (required),
-  for authenticating to [Stackhero][STACKHERO].
+  for authenticating to [Stackhero][stackhero].
 - `STACKHERO_PASSWORD` (required),
   for authenticating to Stackhero.
 - `GITHUB_HEAD_REF` (required for `dev`),
@@ -617,14 +617,14 @@ It requires these external variables to be exported
 
 Its relevant files are these:
 
-- `compose.yaml` is the [Docker Compose][DOCKER_COMPOSE] file
-   used for deploying
-   an instance of the API.
-   Many of its parameters
-   contain placeholders
-   that will be replaced
-   by the job
-   during execution time.
+- `compose.yaml` is the [Docker Compose][docker_compose] file
+  used for deploying
+  an instance of the API.
+  Many of its parameters
+  contain placeholders
+  that will be replaced
+  by the job
+  during execution time.
 - `entrypoint.sh` contains the script for the deploy job.
   It basically logs in to Stackhero,
   replaces all required placeholders in `compose.yaml`
@@ -641,7 +641,7 @@ $ export STACKHERO_PASSWORD=XXXXXXXXXXX
 $ m github:fluidattacks/makes-example@main /api/deploy prod
 
                                     🦄 Makes
-                                  v22.08-linux
+                                  v22.11-linux
 
 ─────────────── Fetching github:fluidattacks/makes-example@main ────────────────
 
@@ -693,7 +693,7 @@ we get the following:
 ![Production environment](/static/deploy.png "Production environment")
 
 Deployment jobs for both development and production
-are supported using [GitHub Actions][GITHUB_ACTIONS].
+are supported using [GitHub Actions][github_actions].
 Every time a developer opens a pull request,
 a development environment for the API is created.
 Similarly, once that pull request is merged,
@@ -701,25 +701,25 @@ a new version of the API is deployed to production.
 
 # References
 
-- [CACHIX]: https://www.cachix.org/
-  [Cachix][CACHIX]
-- [DOCKER]: https://www.docker.com/
-  [Docker][DOCKER]
-- [DOCKER_COMPOSE]: https://docs.docker.com/compose/
-  [Docker Compose][DOCKER_COMPOSE]
-- [FASTAPI]: https://fastapi.tiangolo.com/
-  [FastAPI][FASTAPI]
-- [GITHUB_ACTIONS]: https://docs.github.com/en/actions/
-  [GitHub Actions][GITHUB_ACTIONS]
-- [KUBERNETES]: https://kubernetes.io/
-  [Kubernetes][KUBERNETES]
-- [MAKES]: https://github.com/fluidattacks/makes/
-  [Makes][MAKES]
-- [NIX]: https://nixos.org/
-  [Nix][NIX]
-- [NIXPKGS]: https://github.com/NixOS/nixpkgs/
-  [Nixpkgs][NIXPKGS]
-- [NOMAD]: https://www.nomadproject.io/
-  [Nomad][NOMAD]
-- [STACKHERO]: https://www.stackhero.io/en/
-  [Stackhero][STACKHERO]
+- [cachix]: https://www.cachix.org/
+  [Cachix][cachix]
+- [docker]: https://www.docker.com/
+  [Docker][docker]
+- [docker_compose]: https://docs.docker.com/compose/
+  [Docker Compose][docker_compose]
+- [fastapi]: https://fastapi.tiangolo.com/
+  [FastAPI][fastapi]
+- [github_actions]: https://docs.github.com/en/actions/
+  [GitHub Actions][github_actions]
+- [kubernetes]: https://kubernetes.io/
+  [Kubernetes][kubernetes]
+- [makes]: https://github.com/fluidattacks/makes/
+  [Makes][makes]
+- [nix]: https://nixos.org/
+  [Nix][nix]
+- [nixpkgs]: https://github.com/NixOS/nixpkgs/
+  [Nixpkgs][nixpkgs]
+- [nomad]: https://www.nomadproject.io/
+  [Nomad][nomad]
+- [stackhero]: https://www.stackhero.io/en/
+  [Stackhero][stackhero]

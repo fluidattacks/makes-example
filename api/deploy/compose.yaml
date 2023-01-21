@@ -6,7 +6,7 @@ networks:
     external: true
 services:
   app:
-    image: ghcr.io/fluidattacks/makes:22.08
+    image: ghcr.io/fluidattacks/makes:22.11
     hostname: makes-example-${BRANCH}
     container_name: makes-example-${BRANCH}
     networks: [app]
