@@ -192,7 +192,7 @@ m github:fluidattacks/makes-example@main
 Using [Docker][docker]:
 
 ```bash
-docker run ghcr.io/fluidattacks/makes:22.11 m github:fluidattacks/makes-example@main
+docker run ghcr.io/fluidattacks/makes/amd64:latest m github:fluidattacks/makes-example@main
 ```
 
 # Running Makes on containers
@@ -222,8 +222,8 @@ Let's take a look at this job in `.github/workflows/dev.yml`:
 formatNix:
    runs-on: ubuntu-latest
    steps:
-   - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-   - uses: docker://ghcr.io/fluidattacks/makes:22.11
+   - uses: actions/checkout@f095bcc56b7c2baf48f3ac70d6d6782f4f553222
+   - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
       name: /formatNix
       with:
          set-safe-directory: "/github/workspace"
@@ -367,10 +367,16 @@ can be configured as follows:
 ```nix
 {
   cache = {
-    readAndWrite = {
-      enable = true;
-      name = "makes";
-      pubKey = "makes.cachix.org-1:zO7UjWLTRR8Vfzkgsu1PESjmb6ymy1e4OE9YfMmCQR4=";
+    readNixos = true;
+    extra = {
+      makes = {
+        enable = true;
+        pubKey = "makes.cachix.org-1:zO7UjWLTRR8Vfzkgsu1PESjmb6ymy1e4OE9YfMmCQR4=";
+        token = "CACHIX_AUTH_TOKEN";
+        type = "cachix";
+        url = "https://makes.cachix.org";
+        write = true;
+      };
     };
   };
 }
