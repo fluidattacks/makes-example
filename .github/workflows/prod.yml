@@ -7,10 +7,10 @@ jobs:
   api_deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+      - uses: actions/checkout@f095bcc56b7c2baf48f3ac70d6d6782f4f553222
         with:
           fetch-depth: 0
-      - uses: docker://ghcr.io/fluidattacks/makes:22.11
+      - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /api/deploy
         with:
           set-safe-directory: /github/workspace
@@ -23,10 +23,10 @@ jobs:
   formatBash:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+      - uses: actions/checkout@f095bcc56b7c2baf48f3ac70d6d6782f4f553222
         with:
           fetch-depth: 0
-      - uses: docker://ghcr.io/fluidattacks/makes:22.11
+      - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /formatBash
         with:
           set-safe-directory: /github/workspace
@@ -37,8 +37,8 @@ jobs:
   formatMarkdown:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-      - uses: docker://ghcr.io/fluidattacks/makes:22.11
+      - uses: actions/checkout@f095bcc56b7c2baf48f3ac70d6d6782f4f553222
+      - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /formatMarkdown
         with:
           set-safe-directory: /github/workspace
@@ -49,8 +49,8 @@ jobs:
   formatNix:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-      - uses: docker://ghcr.io/fluidattacks/makes:22.11
+      - uses: actions/checkout@f095bcc56b7c2baf48f3ac70d6d6782f4f553222
+      - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /formatNix
         with:
           set-safe-directory: /github/workspace
@@ -58,25 +58,25 @@ jobs:
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
-  formatPython:
+  formatPython_default:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-      - uses: docker://ghcr.io/fluidattacks/makes:22.11
-        name: /formatPython
+      - uses: actions/checkout@f095bcc56b7c2baf48f3ac70d6d6782f4f553222
+      - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
+        name: /formatPython/default
         with:
           set-safe-directory: /github/workspace
-          args: m . /formatPython
+          args: m . /formatPython/default
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
   lintBash:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+      - uses: actions/checkout@f095bcc56b7c2baf48f3ac70d6d6782f4f553222
         with:
           fetch-depth: 0
-      - uses: docker://ghcr.io/fluidattacks/makes:22.11
+      - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /lintBash
         with:
           set-safe-directory: /github/workspace
@@ -87,10 +87,10 @@ jobs:
   lintGitCommitMsg:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+      - uses: actions/checkout@f095bcc56b7c2baf48f3ac70d6d6782f4f553222
         with:
           fetch-depth: 0
-      - uses: docker://ghcr.io/fluidattacks/makes:22.11
+      - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /lintGitCommitMsg
         with:
           set-safe-directory: /github/workspace
@@ -101,10 +101,10 @@ jobs:
   lintGitMailMap:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+      - uses: actions/checkout@f095bcc56b7c2baf48f3ac70d6d6782f4f553222
         with:
           fetch-depth: 0
-      - uses: docker://ghcr.io/fluidattacks/makes:22.11
+      - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /lintGitMailMap
         with:
           set-safe-directory: /github/workspace
@@ -115,8 +115,8 @@ jobs:
   lintMarkdown_readme:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-      - uses: docker://ghcr.io/fluidattacks/makes:22.11
+      - uses: actions/checkout@f095bcc56b7c2baf48f3ac70d6d6782f4f553222
+      - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /lintMarkdown/readme
         with:
           set-safe-directory: /github/workspace
@@ -127,8 +127,8 @@ jobs:
   lintNix:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-      - uses: docker://ghcr.io/fluidattacks/makes:22.11
+      - uses: actions/checkout@f095bcc56b7c2baf48f3ac70d6d6782f4f553222
+      - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /lintNix
         with:
           set-safe-directory: /github/workspace
@@ -139,8 +139,8 @@ jobs:
   lintPython_module_api:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-      - uses: docker://ghcr.io/fluidattacks/makes:22.11
+      - uses: actions/checkout@f095bcc56b7c2baf48f3ac70d6d6782f4f553222
+      - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /lintPython/module/api
         with:
           set-safe-directory: /github/workspace
@@ -151,8 +151,8 @@ jobs:
   lintWithLizard_api:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-      - uses: docker://ghcr.io/fluidattacks/makes:22.11
+      - uses: actions/checkout@f095bcc56b7c2baf48f3ac70d6d6782f4f553222
+      - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /lintWithLizard/api
         with:
           set-safe-directory: /github/workspace
@@ -163,8 +163,8 @@ jobs:
   securePythonWithBandit_api:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-      - uses: docker://ghcr.io/fluidattacks/makes:22.11
+      - uses: actions/checkout@f095bcc56b7c2baf48f3ac70d6d6782f4f553222
+      - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /securePythonWithBandit/api
         with:
           set-safe-directory: /github/workspace

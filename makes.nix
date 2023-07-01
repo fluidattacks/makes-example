@@ -1,9 +1,15 @@
 {fetchNixpkgs, ...}: {
   cache = {
-    readAndWrite = {
-      enable = true;
-      name = "makes";
-      pubKey = "makes.cachix.org-1:zO7UjWLTRR8Vfzkgsu1PESjmb6ymy1e4OE9YfMmCQR4=";
+    readNixos = true;
+    extra = {
+      makes = {
+        enable = true;
+        pubKey = "makes.cachix.org-1:zO7UjWLTRR8Vfzkgsu1PESjmb6ymy1e4OE9YfMmCQR4=";
+        token = "CACHIX_AUTH_TOKEN";
+        type = "cachix";
+        url = "https://makes.cachix.org";
+        write = true;
+      };
     };
   };
   formatBash = {
@@ -20,8 +26,9 @@
     targets = ["/"];
   };
   formatPython = {
-    enable = true;
-    targets = ["/"];
+    default = {
+      targets = ["/"];
+    };
   };
   formatYaml = {
     enable = true;
