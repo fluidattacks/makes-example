@@ -1,9 +1,14 @@
-{outputs, ...}: {
+{
+  inputs,
+  outputs,
+  makePythonPyprojectPackage,
+  projectPath,
+  ...
+}: {
   lintPython = {
     modules = {
       api = {
         searchPaths.source = [outputs."/api/env"];
-        python = "3.9";
         src = "/api/src";
       };
     };
@@ -12,9 +17,6 @@
     api = ["/api/src"];
   };
   securePythonWithBandit = {
-    api = {
-      python = "3.9";
-      target = "/api/src";
-    };
+    api.target = "/api/src";
   };
 }

@@ -13,8 +13,7 @@ jobs:
       - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /api/deploy
         with:
-          set-safe-directory: /github/workspace
-          args: m . /api/deploy prod
+          args: sh -c "chown -R root:root /github/workspace && m . /api/deploy prod"
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
           STACKHERO_SERVICE_ID: ${{ secrets.STACKHERO_SERVICE_ID }}
@@ -29,8 +28,7 @@ jobs:
       - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /formatBash
         with:
-          set-safe-directory: /github/workspace
-          args: m . /formatBash
+          args: sh -c "chown -R root:root /github/workspace && m . /formatBash"
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
@@ -41,8 +39,7 @@ jobs:
       - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /formatMarkdown
         with:
-          set-safe-directory: /github/workspace
-          args: m . /formatMarkdown
+          args: sh -c "chown -R root:root /github/workspace && m . /formatMarkdown"
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
@@ -53,8 +50,7 @@ jobs:
       - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /formatNix
         with:
-          set-safe-directory: /github/workspace
-          args: m . /formatNix
+          args: sh -c "chown -R root:root /github/workspace && m . /formatNix"
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
@@ -65,8 +61,7 @@ jobs:
       - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /formatPython/default
         with:
-          set-safe-directory: /github/workspace
-          args: m . /formatPython/default
+          args: sh -c "chown -R root:root /github/workspace && m . /formatPython/default"
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
@@ -79,8 +74,7 @@ jobs:
       - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /lintBash
         with:
-          set-safe-directory: /github/workspace
-          args: m . /lintBash
+          args: sh -c "chown -R root:root /github/workspace && m . /lintBash"
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
@@ -93,8 +87,7 @@ jobs:
       - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /lintGitCommitMsg
         with:
-          set-safe-directory: /github/workspace
-          args: m . /lintGitCommitMsg
+          args: sh -c "chown -R root:root /github/workspace && m . /lintGitCommitMsg"
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
@@ -107,8 +100,7 @@ jobs:
       - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /lintGitMailMap
         with:
-          set-safe-directory: /github/workspace
-          args: m . /lintGitMailMap
+          args: sh -c "chown -R root:root /github/workspace && m . /lintGitMailMap"
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
@@ -119,8 +111,7 @@ jobs:
       - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /lintMarkdown/readme
         with:
-          set-safe-directory: /github/workspace
-          args: m . /lintMarkdown/readme
+          args: sh -c "chown -R root:root /github/workspace && m . /lintMarkdown/readme"
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
@@ -131,8 +122,7 @@ jobs:
       - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /lintNix
         with:
-          set-safe-directory: /github/workspace
-          args: m . /lintNix
+          args: sh -c "chown -R root:root /github/workspace && m . /lintNix"
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
@@ -143,8 +133,7 @@ jobs:
       - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /lintPython/module/api
         with:
-          set-safe-directory: /github/workspace
-          args: m . /lintPython/module/api
+          args: sh -c "chown -R root:root /github/workspace && m . /lintPython/module/api"
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
@@ -155,8 +144,7 @@ jobs:
       - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /lintWithLizard/api
         with:
-          set-safe-directory: /github/workspace
-          args: m . /lintWithLizard/api
+          args: sh -c "chown -R root:root /github/workspace && m . /lintWithLizard/api"
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
@@ -167,8 +155,7 @@ jobs:
       - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /securePythonWithBandit/api
         with:
-          set-safe-directory: /github/workspace
-          args: m . /securePythonWithBandit/api
+          args: sh -c "chown -R root:root /github/workspace && m . /securePythonWithBandit/api"
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 name: prod

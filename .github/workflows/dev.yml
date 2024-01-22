@@ -13,8 +13,7 @@ jobs:
       - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /api/deploy
         with:
-          set-safe-directory: /github/workspace
-          args: m . /api/deploy dev
+          args: sh -c "chown -R root:root /github/workspace && m . /api/deploy dev"
         env:
           STACKHERO_SERVICE_ID: ${{ secrets.STACKHERO_SERVICE_ID }}
           STACKHERO_PASSWORD: ${{ secrets.STACKHERO_PASSWORD }}
@@ -28,8 +27,7 @@ jobs:
       - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /formatBash
         with:
-          set-safe-directory: /github/workspace
-          args: m . /formatBash
+          args: sh -c "chown -R root:root /github/workspace && m . /formatBash"
 
   formatMarkdown:
     runs-on: ubuntu-latest
@@ -38,8 +36,7 @@ jobs:
       - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /formatMarkdown
         with:
-          set-safe-directory: /github/workspace
-          args: m . /formatMarkdown
+          args: sh -c "chown -R root:root /github/workspace && m . /formatMarkdown"
 
   formatNix:
     runs-on: ubuntu-latest
@@ -48,8 +45,7 @@ jobs:
       - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /formatNix
         with:
-          set-safe-directory: /github/workspace
-          args: m . /formatNix
+          args: sh -c "chown -R root:root /github/workspace && m . /formatNix"
 
   formatPython_default:
     runs-on: ubuntu-latest
@@ -58,8 +54,7 @@ jobs:
       - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /formatPython/default
         with:
-          set-safe-directory: /github/workspace
-          args: m . /formatPython/default
+          args: sh -c "chown -R root:root /github/workspace && m . /formatPython/default"
 
   lintBash:
     runs-on: ubuntu-latest
@@ -70,8 +65,7 @@ jobs:
       - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /lintBash
         with:
-          set-safe-directory: /github/workspace
-          args: m . /lintBash
+          args: sh -c "chown -R root:root /github/workspace && m . /lintBash"
 
   lintGitCommitMsg:
     runs-on: ubuntu-latest
@@ -82,8 +76,7 @@ jobs:
       - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /lintGitCommitMsg
         with:
-          set-safe-directory: /github/workspace
-          args: m . /lintGitCommitMsg
+          args: sh -c "chown -R root:root /github/workspace && m . /lintGitCommitMsg"
 
   lintGitMailMap:
     runs-on: ubuntu-latest
@@ -94,8 +87,7 @@ jobs:
       - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /lintGitMailMap
         with:
-          set-safe-directory: /github/workspace
-          args: m . /lintGitMailMap
+          args: sh -c "chown -R root:root /github/workspace && m . /lintGitMailMap"
 
   lintMarkdown_readme:
     runs-on: ubuntu-latest
@@ -104,8 +96,7 @@ jobs:
       - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /lintMarkdown/readme
         with:
-          set-safe-directory: /github/workspace
-          args: m . /lintMarkdown/readme
+          args: sh -c "chown -R root:root /github/workspace && m . /lintMarkdown/readme"
 
   lintNix:
     runs-on: ubuntu-latest
@@ -114,8 +105,7 @@ jobs:
       - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /lintNix
         with:
-          set-safe-directory: /github/workspace
-          args: m . /lintNix
+          args: sh -c "chown -R root:root /github/workspace && m . /lintNix"
 
   lintPython_module_api:
     runs-on: ubuntu-latest
@@ -124,8 +114,7 @@ jobs:
       - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /lintPython/module/api
         with:
-          set-safe-directory: /github/workspace
-          args: m . /lintPython/module/api
+          args: sh -c "chown -R root:root /github/workspace && m . /lintPython/module/api"
 
   lintWithLizard_api:
     runs-on: ubuntu-latest
@@ -134,8 +123,7 @@ jobs:
       - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /lintWithLizard/api
         with:
-          set-safe-directory: /github/workspace
-          args: m . /lintWithLizard/api
+          args: sh -c "chown -R root:root /github/workspace && m . /lintWithLizard/api"
 
   securePythonWithBandit_api:
     runs-on: ubuntu-latest
@@ -144,8 +132,7 @@ jobs:
       - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
         name: /securePythonWithBandit/api
         with:
-          set-safe-directory: /github/workspace
-          args: m . /securePythonWithBandit/api
+          args: sh -c "chown -R root:root /github/workspace && m . /securePythonWithBandit/api"
 name: dev
 on:
   pull_request:
