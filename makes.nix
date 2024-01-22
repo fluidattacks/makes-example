@@ -40,8 +40,8 @@
   ];
   inputs = {
     nixpkgs = fetchNixpkgs {
-      rev = "f88fc7a04249cf230377dd11e04bf125d45e9abe";
-      sha256 = "1dkwcsgwyi76s1dqbrxll83a232h9ljwn4cps88w9fam68rf8qv3";
+      rev = "32c00dc37042934c79041116383e27f04ad84710";
+      sha256 = "sha256-Pe7Wjyzzj+tyxvxlP4JXY1z/vkxIE9i2G4F25+Y0zR0=";
     };
   };
   lintBash = {
