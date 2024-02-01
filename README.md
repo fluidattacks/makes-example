@@ -220,14 +220,13 @@ Let's take a look at this job in `.github/workflows/dev.yml`:
 
 ```yaml
 formatNix:
-   runs-on: ubuntu-latest
-   steps:
-   - uses: actions/checkout@f095bcc56b7c2baf48f3ac70d6d6782f4f553222
-   - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@f095bcc56b7c2baf48f3ac70d6d6782f4f553222
+    - uses: docker://ghcr.io/fluidattacks/makes/amd64:latest
       name: /formatNix
       with:
-         set-safe-directory: "/github/workspace"
-         args: m . /formatNix
+        args: sh -c "chown -R root:root /github/workspace && m . /formatNix"
 ```
 
 By looking at this portion of code
@@ -242,8 +241,8 @@ that supports containers.
 # The makes.nix file
 
 You will find this file in the root of the repository.
-According to the [documentation](https://github.com/fluidattacks/makes#makesnix-reference),
-in this file you can specify any [builtin](https://github.com/fluidattacks/makes#makesnix-reference)
+According to the [documentation](https://makes.fluidattacks.com/),
+in this file you can specify any [builtin](https://makes.fluidattacks.com/api/builtins/)
 supported by [Makes][makes]
 and configure it to run on your project.
 
@@ -262,7 +261,7 @@ Let's review one of the builtins used:
 }
 ```
 
-The [lintBash](https://github.com/fluidattacks/makes#lintbash) builtin
+The [lintBash](https://makes.fluidattacks.com/api/builtins/lint/#lintbash) builtin
 lints all `bash` files
 within the specified path `/`.
 
@@ -312,7 +311,7 @@ in all `bash` files.
 
 We can also specify
 what version of [Nixpkgs][nixpkgs] we want to use
-by using [fetchNixpkgs](https://github.com/fluidattacks/makes#fetchnixpkgs).
+by using [fetchNixpkgs](https://makes.fluidattacks.com/api/extensions/fetchers/#fetchnixpkgs).
 
 ```nix
 {
@@ -359,7 +358,7 @@ or to an imported one.
 [<img src="https://img.shields.io/badge/attr-easy-orange.svg" alt="easy">](#easy)
 [<img src="https://img.shields.io/badge/attr-fast-blueviolet.svg" alt="fast">](#fast)
 
-A decentralized [cache](https://github.com/fluidattacks/makes#cache)
+A decentralized [cache](https://makes.fluidattacks.com/api/builtins/performance/#cache)
 for speeding up builds
 that relies on [Cachix][cachix]
 can be configured as follows:
@@ -417,22 +416,21 @@ of an isolated environment
 for all the dependencies
 required by the API to work.
 
-- `pypi-deps.yaml` contains the dependencies
-  required by the API.
-- `pypi-source.yaml` contains a lockfile
+- `pyproject.toml` will orchestrate the API
+  and the dependencies required by it.
+- `poetry.lock` is a lockfile
   with the entire dependency tree
   required by the API.
   Each dependency is cryptographically signed
   and points to the exact URL
   of the expected package.
-  You can use [makePythonLock](https://github.com/fluidattacks/makes#makepythonlock)
-  to generate a lockfile.
+  You can use [makePythonLock](https://makes.fluidattacks.com/api/builtins/utilities/#makepythonlock)
+  to generate a lockfile for [makePythonEnvironment](https://makes.fluidattacks.com/api/extensions/python/#makepythonenvironment).
 - `main.nix` is the core file
-  for implementing [custom workflows](https://github.com/fluidattacks/makes#mainnix-reference).
+  for implementing [custom workflows](https://makes.fluidattacks.com/api/extensions/).
   For this specific example,
-  it implements the [makePythonPypiEnvironment](https://github.com/fluidattacks/makes#makepythonpypienvironment)
-  builtin that returns an isolated environment
-  with the specified dependency tree.
+  it implements the [makePythonEnvironment](https://makes.fluidattacks.com/api/extensions/python/#makepythonenvironment)
+  builtin that creates a Python Virtual environment using [poetry2nix](https://github.com/nix-community/poetry2nix/tree/74921da7e0cc8918adc2e9989bd3e9c127b25ff6).
   This environment will be used later on by the API.
 
   Try running `m github:fluidattacks/makes-example@main /api/env`.
@@ -462,7 +460,6 @@ An interesting job is this one:
     modules = {
       api = {
         searchPaths.source = [outputs."/api/env"];
-        python = "3.9";
         src = "/api/src";
       };
     };
@@ -497,39 +494,35 @@ makeScript {
     __argApiSrc__ = projectPath "/api/src";
   };
   name = "api";
-  searchPaths = {
-    bin = [inputs.nixpkgs.python39];
-    source = [outputs."/api/env"];
-  };
+  searchPaths.source = [outputs."/api/env"];
   entrypoint = ./entrypoint.sh;
 }
 ```
 
-This file uses [makeScript](https://github.com/fluidattacks/makes#makescript)
-for serving the API.
-Here is a detailed description for every parameter
+This file uses [makeScript](https://makes.fluidattacks.com/api/extensions/fundamentals/#makescript)
+to serve the API.
+Here is a detailed description of every parameter
 
 - `replace` allows the creation of placeholders
   that can later be replaced
   in the executed script.
-  It uses [projectPath](https://github.com/fluidattacks/makes#projectpath),
+  It uses [projectPath](https://makes.fluidattacks.com/api/extensions/fundamentals/#projectpath),
   a builtin that allows creating
   an immutable version of a path
   within a repository.
   By doing this,
   we will be able to reference
   the API source code
-  in an semi-isolated environment.
+  in a semi-isolated environment.
 - `name` just allows specifying
   the name of the job.
-- `searchPaths` implements the [makeSearchPaths](https://github.com/fluidattacks/makes#makesearchpaths)
+- `searchPaths` implements the [makeSearchPaths](https://makes.fluidattacks.com/api/extensions/fundamentals/#makesearchpaths)
   builtin.
   It allows us to provide
   all required dependencies
   to our isolated environment.
   For the API to run properly,
-  we will bring Python 3.9 from [Nixpkgs][nixpkgs]
-  and source the [API environment](#api-environment).
+  we will source the [API environment](#api-environment).
 - `entrypoint` is the shell script
   that will be executed in the job.
   It basically switches to the API source code directory
